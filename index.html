@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Josiah Leinbach - Statistician and GenAI Consultant</title>
+    <title>Josiah Leinbach Professional Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
             margin: 0;
@@ -13,15 +14,25 @@
             overflow: hidden;
         }
         .sidebar {
-            width: 25%;
+            width: 20%;
             background-color: #2c3e50;
             padding: 20px;
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
-            justify-content: flex-end;
-            align-items: right;
+            justify-content: space-between;
+            align-items: center;
             text-align: right;
+        }
+        .sidebar .headshot {
+            max-width: 150px;
+            border-radius: 50%;
+            margin-top: 100px;
+        }
+        .sidebar .text-content {
+            display: flex;
+            flex-direction: column;
+            align-items: right;
         }
         .sidebar h1 {
             margin: 0;
@@ -29,7 +40,7 @@
             color: #F9F5F0;
         }
         .sidebar h3 {
-            margin: 0;
+            margin: 10px 0;
             color: #7A7A73;
         }
         .sidebar ul {
@@ -47,6 +58,18 @@
         .sidebar ul li a:hover {
             text-decoration: underline;
         }
+        .social-icons {
+            margin-top: 10px;
+        }
+        .social-icons a {
+            color: #F9F5F0;
+            font-size: 24px;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        .social-icons a:hover {
+            color: #0056b3;
+        }
         .main-content {
             width: 75%;
             display: flex;
@@ -55,36 +78,43 @@
             padding: 20px;
             box-sizing: border-box;
         }
-        .headshot {
-            max-width: 200px;
-            border-radius: 50%;
-            margin-bottom: 20px;
-        }
         .about-me {
             max-width: 600px;
-            margin: 75px;
             text-align: left;
-            font-size: 15px;
+            font-size: 16px;
             line-height: 1.6;
         }
     </style>
 </head>
 <body>
     <div class="sidebar">
-        <h1>Josiah Leinbach</h1>
-        <h3>Statistician and GenAI Consultant</h3>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#publications">Publications</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+        <img src="images/headshot.jpg" alt="Josiah Leinbach's headshot" id="headshot">
+        <div class="text-content">
+            <h1>Josiah Leinbach</h1>
+            <h3>Statistician and GenAI Consultant</h3>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#contact">Honors</a></li>
+            </ul>
+        <div class="social-icons">
+            <a href="https://github.com/josiah-leinbach" target="_blank" aria-label="GitHub">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/josiah-leinbach-333601206/" target="_blank" aria-label="LinkedIn">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://x.com/EBurke1790" target="_blank" aria-label="Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+        </div>
+        </div>
     </div>
     <div class="main-content">
-        <img src="path/to/your/headshot.jpg" alt="Your Headshot" class="headshot">
         <div class="about-me">
             <h2>About Me</h2>
-                    <p>
+            <p>
             I am a statistician, amateur historian, and aspiring Renaissance man. 
             I earned a B.A. in History from Hillsdale College (2020), where I was a Winston Churchill Fellow in History and Military History.
             Later, I earned an M.S. in Applied Statistics and M.A. in Economics from Bowling Green State University (2025).
@@ -102,6 +132,9 @@
         <p>
             In my free time, I republish out-of-print Anglican theological texts and direct the 
             <a href="https://www.prolegopress.com/whitaker-fellowship" title="Whitaker Fellowship" target="_blank" rel="noopener noreferrer">Whitaker Fellowship</a> at Prolego Press.
+        </p>
+        <p>
+            Professional inquiries, collaboration requests, and questions about my research are always welcome and encouraged: josiahleinbach@gmail.com.
         </p>
         </div>
     </div>
