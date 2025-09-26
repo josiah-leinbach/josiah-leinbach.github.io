@@ -3,199 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Josiah Leinbach - Professional Portfolio</title>
+    <title>Josiah Leinbach - Statistician and GenAI Consultant</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
+            margin: 0;
             font-family: "Gill Sans";
-            line-height: 1.6;
-            color: #333;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
         }
-
-        header {
-            padding: 60px 0;
-            background-color: #f8f9fa;
-            margin-bottom: 40px;
-            text-align: center;
+        .sidebar {
+            width: 25%;
+            background-color: #2c3e50;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: right;
+            text-align: right;
         }
-        
-        .header-content {
+        .sidebar h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #F9F5F0;
+        }
+        .sidebar h3 {
+            margin: 0;
+            color: #7A7A73;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            margin: 10px 0;
+        }
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #F9F5F0;
+            font-size: 18px;
+        }
+        .sidebar ul li a:hover {
+            text-decoration: underline;
+        }
+        .main-content {
+            width: 75%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            gap: 30px;
-        }
-        
-        .profile-image {
-            margin-top: 20px;
-        }
-        
-        #headshot {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #fff;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        
-        .header-text {
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            color: #2c3e50;
-        }
-
-        .bio {
-            font-size: 1.2rem;
-            color: #7f8c8d;
-            margin-bottom: 20px;
-        }
-
-        nav {
-            background-color: #2c3e50;
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        nav ul {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-        }
-
-        nav li {
-            margin: 0 15px;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1.1rem;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: #3498db;
-        }
-
-        section {
-            padding: 40px 0;
-        }
-
-        h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-        }
-
-        p {
-            margin-bottom: 20px;
-        }
-
-        .research-item {
-            margin-bottom: 30px;
-        }
-
-        .research-item h3 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        .publication {
-            background-color: #f8f9fa;
             padding: 20px;
+            box-sizing: border-box;
+        }
+        .headshot {
+            max-width: 200px;
+            border-radius: 50%;
             margin-bottom: 20px;
-            border-left: 4px solid #3498db;
         }
-
-        .publication h3 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px 0;
-            background-color: #f8f9fa;
-            margin-top: 40px;
-        }
-
-        .social-links {
-            margin-top: 20px;
-        }
-
-        .social-links a {
-            margin: 0 10px;
-            color: #2c3e50;
-            font-size: 1.5rem;
-            text-decoration: none;
-        }
-
-        /* Responsive styles */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            nav ul {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            nav li {
-                margin: 5px 0;
-            }
-            
-            #headshot {
-                width: 150px;
-                height: 150px;
-            }
+        .about-me {
+            max-width: 600px;
+            margin: 75px;
+            text-align: left;
+            font-size: 15px;
+            line-height: 1.6;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <div class="profile-image">
-                <img src="images/headshot.jpg" alt="Josiah Leinbach's headshot" id="headshot">
-            </div>
-            <div class="header-text">
-                <h1>Josiah Leinbach</h1>
-                <p class="bio">Statistician and GenAI Consultant</p>
-            </div>
-        </div>
-    </header>
-
-    <nav>
+    <div class="sidebar">
+        <h1>Josiah Leinbach</h1>
+        <h3>Statistician and GenAI Consultant</h3>
         <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#honors">Honors</a></li>
-            <li><a href="#research">Research & Publications</a></li>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#publications">Publications</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
-    </nav>
-
-    <section id="about">
-        <h2>About Me</h2>
-        <p>
+    </div>
+    <div class="main-content">
+        <img src="path/to/your/headshot.jpg" alt="Your Headshot" class="headshot">
+        <div class="about-me">
+            <h2>About Me</h2>
+                    <p>
             I am a statistician, amateur historian, and aspiring Renaissance man. 
             I earned a B.A. in History from Hillsdale College (2020), where I was a Winston Churchill Fellow in History and Military History.
             Later, I earned an M.S. in Applied Statistics and M.A. in Economics from Bowling Green State University (2025).
@@ -214,148 +103,7 @@
             In my free time, I republish out-of-print Anglican theological texts and direct the 
             <a href="https://www.prolegopress.com/whitaker-fellowship" title="Whitaker Fellowship" target="_blank" rel="noopener noreferrer">Whitaker Fellowship</a> at Prolego Press.
         </p>
-    </section>
-
-    <section id ="honors">
-        <h2>Honors</h2>
-        <p>
-            <h3>3 Minute Thesis Competition (3MT) Midwest Regional Semi-Finalist (2025)</h3>
-            <p>
-                A recording of my university-level 3MT competition can be found <a href="https://youtu.be/_E_LWs7-_aI?si=Wx0xtI14ODBhPm9k" title="Leinbach 3MT" target="_blank" rel="noopener noreferrer">here</a>.
-            </p>
-        </p>
-        <p>
-            <h3>Director's Award for Public Policy Essay (Hoover Institution, Stanford University, 2024)</h3>
-            <p>
-                "'Till Death (Or Taxes) Us Do Part: Removing Marriage Penalties in the Federal EITC" (September 2024).
-            </p>
-        </p>
-        <p>
-            <h3>James A. Sullivan Award for outstanding service to the statistics department (BGSU, 2024)</h3>
-        </p>
-        <p>
-            <h3>Arlan P. Gilbert Award for original historical research (Hillsdale College, 2020)</h3>
-        </p>
-    </section>
-
-    <section id="research">
-        <h2>Research & Publications</h2>
-
-        <div class="research-item">
-            <h3>Microeconomic Applications of LLMs' Macroeconomic Landscape</h3>
-            <p>
-                <ol style="margin-left: 40px;">
-                    <li>Integrate cognitive science, developmental psychology, and social epistemology  
-                        to find beneficial use-cases for LLMs.</li>
-                    <li>Determine best practices for using LLMs in education, research, and office tasks.</li>
-                    <li>Establish ethical principles for students, teachers, and corporate managers in using LLMs.</li>
-                </ol>
-            </p>
         </div>
-        
-        <div class="research-item">
-            <h3>Feasibility of private, inter-city bus transit in northwest Ohio</h3>
-            <p>
-                Devising an economic feasibility study for a proposed (i.e. theoretical) private, inter-city bus transit company that
-                would service cities and towns around Toledo, OH.
-            </p>
-        </div>
-        
-        <div class="research-item">
-            <h3>Stylometric analysis of the Greek New Testament</h3>
-            <p>
-                Designing various stylostatistical models for the Greek New Testament (GNT), based on New Testament scholarship, that 
-                explore the relationship between writing style and subject matter, genre, and rhetorical register.
-            </p>
-        </div>
-        <div class="research-item">
-            <h3>Bletchleyism</h3>
-                Few topics draw together so wonderfully my love of history, statistical methods, and interdisciplinary approaches to problem-solving as does the story of
-                <a href="https://en.wikipedia.org/wiki/Bletchley_Park" title="Bletchley Park" target="_blank" rel="noopener noreferrer">Bletchley Park</a> and the breaking of 
-                German ciphers in WWII. As such, I occasionally publish my thoughts on sundry subjects, from 16th century monarchism to social applications of Game Theory, 
-                at <a href="https://josiahleinbach.substack.com" title="Bletchlyism" target="_blank" rel="noopener noreferrer">Bletchleyism</a>.
-            <p>
-            </p>
-        </div>
-        <div class="research-item">
-            <h3>Traditional BCP Parishes</h3>
-                I keep a running list of all traditional Book of Common Prayer (BCP) parishes in the Anglican Church in North America (ACNA), the Anglican Church of Australia (ACA),
-                and the Church of England. 
-                Links for the parish maps and crowd-sourced entry forms can be found <a href="traditional_bcp_parishes/parishes_map_form.html">here</a>. Users may submit additional parishes that are not listed
-                on the map.
-            <p>
-            </p>
-        </div>
-        <h3 style="margin-top: 40px;">Publications</h3>
-        
-        <div class="publication">
-            <h3>Theses</h3>
-            <p>
-                <i>A Hidden Markov Approach to Authorship Attribution of the Pastoral Epistles</i>. Bowling Green State Univeristy (2024). 
-                Advisor: Shuchismita Sarkar
-            </p>
-            <p>
-                <i>Potential Patriots: Why the British West Indies Did Not Join the American Revolution</i>. Hillsdale College (2020).
-                Advisor: David Stewart
-            </p>
-            <h3>Papers</h3>
-            <p>
-                Leinbach, J., Sarkar, S., Zhu, X. (2025). A State-Restricted Hidden Markov Model for Authorship
-                Attribution of the Deutero-Pauline and Pastoral Epistles. Under review for <i>The Journal of the Royal
-                Statistical Society, Series C</i>.
-            <p>
-            <h3>Articles</h3>
-            <p>
-                <a href="https://winstonchurchill.hillsdale.edu/history-statesmanship/" title="History as Prologue" target="_blank" rel="noopener noreferrer">History as Prologue: Winston Churchill and the Historian as Statesman</a>.
-                <i>The Churchill Project</i>, Hillsdale College (17 September 2020).
-            <p>
-        </div>
-        
-        <div class="publication">
-            <h3>Books</h3>
-            <p>
-                Whitaker, William. <i>A Disputation On Holy Scripture</i>. <a href="https://www.amazon.com/Disputation-Holy-Scripture-1/dp/1735923079/ref=sr_1_2" title="Volume 1" target="_blank" rel="noopener noreferrer">Volume 1</a> 
-                and <a href="https://www.amazon.com/Disputation-Holy-Scripture-2/dp/1735923095/ref=sr_1_3" title="Volume 2" target="_blank" rel="noopener noreferrer">Volume 2.</a> Edited by Josiah Leinbach. South Bend: Prolego
-                Press, 2025.
-            </p>
-            <p>
-                <i>The Churchill Document Volumes</i>. Vol. 23, <i>Never Flinch, Never Weary, November 1951 to February 1965</i>. 
-                Edited by Sir Martin Gilbert and Larry P. Arnn. Hillsdale: Hillsdale College Press, 2022.
-                Research and editorial assistance.
-            </p>
-            <p>
-                <i>The Churchill Document Volumes</i>. Vol. 22, <i>Leader of the Opposition, August 1945 to October 1951</i>.
-                Edited by Sir Martin Gilbert and Larry P. Arnn. Hillsdale: Hillsdale College Press, 2019. 
-                Research and editorial assistance.
-            </p>
-            <p>
-                <i>The Churchill Document Volumes</i>. Vol. 21, <i>The Shadows of Victory, January-August 1945</i>. Edited by
-                Sir Martin Gilbert and Larry P. Arnn. Hillsdale: Hillsdale College Press, 2018. 
-                Research and editorial assistance.
-            </p>
-        </div>
-    </section>
-    
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>
-            Professional inquiries, collaboration requests, and questions about my research are always welcome and encouraged:
-        </p>
-        <p>
-            Email: josiahleinbach@gmail.com
-        </p>
-        <p>
-            You can also find me on Twitter at <a href="https://x.com/EBurke1790" title="EBurke1790" target="_blank" rel="noopener noreferrer">EBurke1790.
-        </p>
-        <div class="social-links">
-            <!-- You can add actual links and icons for these later -->
-            <a href="https://www.linkedin.com/in/josiah-leinbach-333601206/" title="LinkedIn" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a href="https://josiahleinbach.substack.com" title="Substack" target="_blank" rel="noopener noreferrer">Substack</a>
-        </div>
-    </section>
-    
-    <footer>
-        <p>&copy; 2025 Josiah Leinbach. All rights reserved.</p>
-    </footer>
+    </div>
 </body>
 </html>
