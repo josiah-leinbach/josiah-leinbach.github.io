@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Josiah Leinbach Professional Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: "Gill Sans";
+            display: flex;
+            height: 100vh;
+        }
+        .sidebar {
+            width: 20%;
+            background-color: #2c3e50;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: right;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        .sidebar .headshot {
+            max-width: 150px;
+            border-radius: 50%;
+            margin-top: 100px;
+        }
+        .sidebar .text-content {
+            display: flex;
+            flex-direction: column;
+            align-items: right;
+        }
+        .sidebar h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #F9F5F0;
+        }
+        .sidebar h3 {
+            margin: 10px 0;
+            color: #7A7A73;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            margin: 10px 0;
+        }
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #F9F5F0;
+            font-size: 18px;
+        }
+        .sidebar ul li a:hover {
+            text-decoration: underline;
+        }
+        .social-icons {
+            margin-top: 10px;
+        }
+        .social-icons a {
+            color: #F9F5F0;
+            font-size: 24px;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        .social-icons a:hover {
+            color: #0056b3;
+        }
+        .main-content {
+            width: 75%;
+            margin-left: 20%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 70px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            height: 100vh;
+        }
+        .publication {
+            background-color: #f8f9fa;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3498db;
+        }
+
+        .publication h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <img src="images/headshot.jpg" alt="Josiah Leinbach's headshot" id="headshot">
+        <div class="text-content">
+            <h1>Josiah Leinbach</h1>
+            <h3>Statistician and GenAI Consultant</h3>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#contact">Honors</a></li>
+            </ul>
+        <div class="social-icons">
+            <a href="https://github.com/josiah-leinbach" target="_blank" aria-label="GitHub">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/josiah-leinbach-333601206/" target="_blank" aria-label="LinkedIn">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://x.com/EBurke1790" target="_blank" aria-label="Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+        </div>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="publication">
+          <h3>Theses</h3>
+            <p>
+                <i>A Hidden Markov Approach to Authorship Attribution of the Pastoral Epistles</i>. Bowling Green State Univeristy (2024). 
+                Advisor: Shuchismita Sarkar
+            </p>
+            <p>
+                <i>Potential Patriots: Why the British West Indies Did Not Join the American Revolution</i>. Hillsdale College (2020).
+                Advisor: David Stewart
+            </p>
+            <h3>Papers</h3>
+            <p>
+                Leinbach, J., Sarkar, S., Zhu, X. (2025). A State-Restricted Hidden Markov Model for Authorship
+                Attribution of the Deutero-Pauline and Pastoral Epistles. Under review for <i>The Journal of the Royal
+                Statistical Society, Series C</i>.
+            <p>
+            <h3>Articles</h3>
+            <p>
+                <a href="https://winstonchurchill.hillsdale.edu/history-statesmanship/" title="History as Prologue" target="_blank" rel="noopener noreferrer">History as Prologue: Winston Churchill and the Historian as Statesman</a>.
+                <i>The Churchill Project</i>, Hillsdale College (17 September 2020).
+            <p>
+        </div>
+        <div class="publication">
+            <h3>Books</h3>
+            <p>
+                Whitaker, William. <i>A Disputation On Holy Scripture</i>. <a href="https://www.amazon.com/Disputation-Holy-Scripture-1/dp/1735923079/ref=sr_1_2" title="Volume 1" target="_blank" rel="noopener noreferrer">Volume 1</a> 
+                and <a href="https://www.amazon.com/Disputation-Holy-Scripture-2/dp/1735923095/ref=sr_1_3" title="Volume 2" target="_blank" rel="noopener noreferrer">Volume 2.</a> Edited by Josiah Leinbach. South Bend: Prolego
+                Press, 2025.
+            </p>
+            <p>
+                <i>The Churchill Document Volumes</i>. Vol. 23, <i>Never Flinch, Never Weary, November 1951 to February 1965</i>. 
+                Edited by Sir Martin Gilbert and Larry P. Arnn. Hillsdale: Hillsdale College Press, 2022.
+                Research and editorial assistance.
+            </p>
+            <p>
+                <i>The Churchill Document Volumes</i>. Vol. 22, <i>Leader of the Opposition, August 1945 to October 1951</i>.
+                Edited by Sir Martin Gilbert and Larry P. Arnn. Hillsdale: Hillsdale College Press, 2019. 
+                Research and editorial assistance.
+            </p>
+            <p>
+                <i>The Churchill Document Volumes</i>. Vol. 21, <i>The Shadows of Victory, January-August 1945</i>. Edited by
+                Sir Martin Gilbert and Larry P. Arnn. Hillsdale: Hillsdale College Press, 2018. 
+                Research and editorial assistance.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
