@@ -1,285 +1,295 @@
 <!DOCTYPE html>
+<!--
+  JOSIAH LEINBACH — PROFESSIONAL PORTFOLIO
+  index.html — Home Page
+
+  FILE STRUCTURE:
+  - This file (index.html) contains your content and page structure.
+  - styles.css (separate file) contains all visual design rules.
+  - Both files must be in the same folder for the design to load.
+
+  TO EDIT YOUR CONTENT:
+  - Find the section you want to change by looking for the <!-- SECTION: ... --> comments.
+  - Edit only the text between HTML tags, e.g. between <p> and </p>.
+  - Do not remove or rename the class="..." attributes — the design depends on them.
+-->
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Josiah Leinbach Professional Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body {
-            margin: 0;
-            font-family: "Gill Sans";
-            display: flex;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-        .sidebar {
-            width: 20%;
-            min-width: 250px;
-            background-color: #2c3e50;
-            padding: 20px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-        .sidebar .headshot {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 20px;
-        }
-        .sidebar .text-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .sidebar h1 {
-            margin: 0;
-            font-size: 24px;
-            color: #F9F5F0;
-        }
-        .sidebar h3 {
-            margin: 10px 0;
-            color: #7A7A73;
-        }
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-            margin: 20px 0;
-        }
-        .sidebar ul li {
-            margin: 10px 0;
-        }
-        .sidebar ul li a {
-            text-decoration: none;
-            color: #F9F5F0;
-            font-size: 18px;
-        }
-        .sidebar ul li a:hover {
-            text-decoration: underline;
-        }
-        .social-icons {
-            margin-top: 10px;
-        }
-        .social-icons a {
-            color: #F9F5F0;
-            font-size: 24px;
-            margin: 0 10px;
-            text-decoration: none;
-        }
-        .social-icons a:hover {
-            color: #0056b3;
-        }
-        .main-content {
-            width: 80%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 70px;
-            box-sizing: border-box;
-            overflow-y: auto;
-        }
-        .box {
-            width: 100%;
-            max-width: 600px;
-            min-height: 90px;
-            background-color: #EDEDED;
-            font-family: "Garamond";
-            text-align: left;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        .about-me {
-            max-width: 600px;
-            width: 100%;
-            text-align: left;
-            font-size: 16px;
-            line-height: 1.6;
-        }
+  <!-- ============================================================
+    META TAGS: These lines tell browsers and search engines
+    basic information about your page. Update the description
+    to reflect your current professional focus.
+  ============================================================ -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Josiah Leinbach — Statistician, Systems Thinker, and Renaissance Man. Professional portfolio.">
+  <title>Josiah Leinbach</title>
 
-        /* Mobile Styles */
-        @media screen and (max-width: 768px) {
-            body {
-                flex-direction: column;
-                height: auto;
-            }
-            
-            .sidebar {
-                width: 100%;
-                min-width: auto;
-                padding: 15px;
-                order: 1;
-            }
-            
-            .sidebar .headshot {
-                width: 120px;
-                height: 120px;
-                margin-bottom: 15px;
-            }
-            
-            .sidebar h1 {
-                font-size: 20px;
-            }
-            
-            .sidebar h3 {
-                font-size: 16px;
-                margin: 5px 0;
-            }
-            
-            .sidebar ul {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                margin: 15px 0;
-            }
-            
-            .sidebar ul li {
-                margin: 5px 15px;
-            }
-            
-            .sidebar ul li a {
-                font-size: 16px;
-            }
-            
-            .social-icons a {
-                font-size: 20px;
-                margin: 0 8px;
-            }
-            
-            .main-content {
-                width: 100%;
-                padding: 20px;
-                order: 2;
-            }
-            
-            .box {
-                padding: 15px;
-                min-height: auto;
-            }
-            
-            .box p {
-                font-size: 14px;
-            }
-            
-            .about-me {
-                font-size: 15px;
-            }
-            
-            .about-me h2 {
-                font-size: 20px;
-            }
-        }
+  <!-- ============================================================
+    GOOGLE FONTS: Loads Cormorant Garamond (the main serif font
+    for headings and body) from Google's servers. The browser
+    downloads this automatically — you don't need to install
+    anything. The | separates the two font families requested.
+    "display=swap" means your text shows immediately in a fallback
+    font while Cormorant loads, preventing a blank flash.
+  ============================================================ -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
 
-        /* Small Mobile Styles */
-        @media screen and (max-width: 480px) {
-            .sidebar {
-                padding: 10px;
-            }
-            
-            .sidebar .headshot {
-                width: 100px;
-                height: 100px;
-            }
-            
-            .sidebar h1 {
-                font-size: 18px;
-            }
-            
-            .sidebar h3 {
-                font-size: 14px;
-            }
-            
-            .sidebar ul li a {
-                font-size: 14px;
-            }
-            
-            .social-icons a {
-                font-size: 18px;
-                margin: 0 6px;
-            }
-            
-            .main-content {
-                padding: 15px;
-            }
-            
-            .box {
-                padding: 12px;
-            }
-            
-            .box p {
-                font-size: 13px;
-            }
-            
-            .about-me {
-                font-size: 14px;
-            }
-            
-            .about-me h2 {
-                font-size: 18px;
-            }
-        }
-    </style>
+  <!-- ============================================================
+    STYLESHEET LINK: Tells the browser to load your CSS file.
+    "href" is the filename — if you rename styles.css, update
+    this line to match.
+  ============================================================ -->
+  <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <div class="sidebar">
-        <img src="images/headshot.jpg" alt="Josiah Leinbach's headshot" class="headshot">
-        <div class="text-content">
-            <h1>Josiah Leinbach</h1>
-            <h3>Statistician and GenAI Consultant</h3>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="publications.html">Publications</a></li>
-                <li><a href="honors.html">Honors</a></li>
-            </ul>
-            <div class="social-icons">
-                <a href="https://github.com/josiah-leinbach" target="_blank" aria-label="GitHub">
-                  <i class="fab fa-github"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/josiah-leinbach-333601206/" target="_blank" aria-label="LinkedIn">
-                  <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="https://x.com/EBurke1790" target="_blank" aria-label="Twitter">
-                  <i class="fab fa-twitter"></i>
-                </a>
-            </div>
+
+  <!-- ============================================================
+    SECTION: NAVIGATION
+    The site-wide navigation bar. It appears at the top of every
+    page. To add or remove pages, copy or delete an <a> tag.
+    The "aria-label" attribute helps screen readers identify
+    this as the main navigation.
+  ============================================================ -->
+  <nav aria-label="Main navigation">
+    <ul>
+      <!-- "active" class highlights the current page in the nav.
+           Move this class to the matching link on each page. -->
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="writing.html">Writing</a></li>
+      <li><a href="cv.html">CV</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ============================================================
+    PAGE WRAPPER: A container div that limits the maximum width
+    of the content and centers it on wide screens. The class
+    "page-wrapper" is styled in styles.css.
+  ============================================================ -->
+  <div class="page-wrapper">
+
+    <!-- ==========================================================
+      SECTION: HERO
+      The top portion of the home page — your name, subtitle,
+      and the Bacon epigraph. This is the first thing visitors see.
+
+      Design notes:
+      - Your name is in large Cormorant Garamond (via CSS).
+      - The subtitle is in Gill Sans (system font), widely tracked.
+      - The ornament (✦) is a typographic fleuron — a small
+        decorative element used in classical book design to
+        separate sections. It can be changed to · or § or removed.
+      - The epigraph and its attribution are styled separately
+        so they can be colored and sized differently.
+    ========================================================== -->
+    <header class="hero">
+
+      <!-- Your name: edit the text here to change how it displays -->
+      <h1 class="hero-name">Josiah Leinbach</h1>
+
+      <!-- Subtitle: the three titles separated by mid-dots (·)
+           The · character is a Unicode "middle dot" (U+00B7).
+           You can copy-paste it if you need to change the text. -->
+      <p class="hero-subtitle">
+        Statistician&ensp;·&ensp;Systems Thinker&ensp;·&ensp;Renaissance Man
+      </p>
+
+      <!-- Ornamental rule: a thin horizontal line with a gold
+           fleuron at the center. This is built entirely in CSS
+           using the ::before and ::after pseudo-elements —
+           you don't need to change anything here to style it. -->
+      <div class="ornamental-rule">
+        <span class="ornament">✦</span>
+      </div>
+
+      <!-- Epigraph: the Bacon quotation. The <blockquote> tag
+           is the semantically correct HTML element for quotations.
+           <cite> marks the attribution. -->
+      <blockquote class="epigraph">
+        <p>"Reading maketh a full man; conference a ready man; and writing an exact man."</p>
+        <cite>— Francis Bacon, <em>Essays</em> (1625)</cite>
+      </blockquote>
+
+    </header>
+
+    <!-- ==========================================================
+      SECTION: ABOUT
+      Your biographical paragraph. This uses your existing About
+      Me text, lightly reframed for a professional audience.
+
+      The <section> tag groups related content. The "aria-label"
+      attribute names it for screen readers. The class "content-section"
+      applies shared spacing rules defined in styles.css.
+    ========================================================== -->
+    <section class="content-section" aria-label="About">
+
+      <!-- Section label: appears above the heading in small caps,
+           in gold. This is the Gill Sans "signpost" role. -->
+      <p class="section-label">About</p>
+
+      <!-- Section heading: the large serif title for this section -->
+      <h2 class="section-heading">About Me</h2>
+
+      <!-- Body text: your About content. Edit freely within
+           the <p> tags. Each <p> is a new paragraph. -->
+      <div class="prose">
+        <p>
+          I am a statistician, systems thinker, and aspiring Renaissance man.
+          I earned a B.A. in History from Hillsdale College (2020), where I was
+          a Winston Churchill Fellow in History and Military History. I later earned
+          an M.S. in Applied Statistics and M.A. in Economics from Bowling Green
+          State University (2025).
+        </p>
+        <p>
+          My professional research interests span sampling methodology,
+          stylostatistical analysis, demography, transit optimization, human
+          performance, applications of Game Theory and Decision Theory, and the
+          ethical and efficient use of large language models in research and
+          organizational workflows.
+        </p>
+        <p>
+          Beyond statistics and economics, I study foreign policy, social psychology,
+          early modern European history, urban planning, Baroque music, and
+          Renaissance art. I am a classically trained pianist, an unapologetic
+          Jane Austen reader, and read across nearly every field from philosophy
+          to physics.
+        </p>
+        <p>
+          In my spare time I republish out-of-print Anglican theological texts and
+          direct the <a href="https://www.prolegopress.com/whitaker-fellowship" target="_blank" rel="noopener">Whitaker Fellowship</a>
+          at Prolego Press. Professional inquiries, collaboration requests, and
+          questions about my research are always welcome.
+        </p>
+      </div>
+
+    </section>
+
+    <!-- ==========================================================
+      SECTION: CURRENT WORK
+      A brief summary of what you are doing professionally right
+      now. This section is important for a professional audience —
+      it answers the immediate question "what does this person
+      actually do?" Replace the placeholder text with your
+      current role and focus areas.
+
+      TO CUSTOMIZE: Replace the text in the three <div class="work-item">
+      blocks with your actual current work. Add or remove blocks
+      as needed by copying or deleting a full <div class="work-item">
+      ... </div> block.
+    ========================================================== -->
+    <section class="content-section" aria-label="Current work">
+
+      <p class="section-label">Current Work</p>
+      <h2 class="section-heading">What I Am Working On</h2>
+
+      <!-- Work items grid: three cards displayed side by side
+           on desktop, stacked on mobile. -->
+      <div class="work-grid">
+
+        <!-- Work item 1: replace with your current role -->
+        <div class="work-item">
+          <!-- Small discipline tag above the title -->
+          <p class="work-tag">Professional</p>
+          <!-- Title of the role or project -->
+          <h3 class="work-title">[Director of Research & Analytics, Florida College System]</h3>
+          <!-- One or two sentences describing what you do -->
+          <p class="work-desc">Replace this with a brief description of your current professional position, organization, and focus area.</p>
         </div>
-    </div>
-    <div class="main-content">
-        <div class="about-me">
-            <div class="box">
-                <p><b><i>"Reading maketh a full man; conference a ready man; and writing an exact man."</i><br>~ Francis Bacon</b></p>
-            </div>
-            <h2>About Me</h2>
-            <p>
-            I am a statistician, amateur historian, and aspiring Renaissance man. 
-            I earned a B.A. in History from Hillsdale College (2020), where I was a Winston Churchill Fellow in History and Military History.
-            Later, I earned an M.S. in Applied Statistics and M.A. in Economics from Bowling Green State University (2025).
-        </p>
-        <p>
-            My research interests are many and varied. Professionally, these include sampling methodology, stylostatistical analysis, 
-            demography, transit optimiziation, human performance, applications for Game Theory and Decision Theory, and efficient but 
-            ethical use of LLMs in studying, research, and workflows, to name a few.
-        </p>
-        <p>
-            Outside of statistics and economics, I enjoy studying foreign policy, social psychology, early modern European history,
-            urban planning, Baroque music, and Renaissance art. I am a classically trained pianist, unapologetic Jane Austen fan, and
-            read on nearly any subject from philosophy to physics.
-        </p>
-        <p>
-            In my free time, I republish out-of-print Anglican theological texts and direct the 
-            <a href="https://www.prolegopress.com/whitaker-fellowship" title="Whitaker Fellowship" target="_blank" rel="noopener noreferrer">Whitaker Fellowship</a> at Prolego Press.
-        </p>
-        <p>
-            Professional inquiries, collaboration requests, and questions about my research are always welcome and encouraged: josiahleinbach@gmail.com.
-        </p>
+
+        <!-- Work item 2: replace with a current research focus -->
+        <div class="work-item">
+          <p class="work-tag">Research</p>
+          <h3 class="work-title">Stylometric Analysis</h3>
+          <p class="work-desc">Designing stylostatistical models for the Greek New Testament, exploring the relationship between writing style, genre, and rhetorical register.</p>
         </div>
+
+        <!-- Work item 3: replace with a current personal project -->
+        <div class="work-item">
+          <p class="work-tag">Publishing</p>
+          <h3 class="work-title">Whitaker Fellowship</h3>
+          <p class="work-desc">Directing the Whitaker Fellowship at Prolego Press, republishing out-of-print Anglican theological texts for contemporary readers.</p>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ==========================================================
+      SECTION: AREAS OF INTEREST
+      A compact list of your professional and intellectual domains.
+      This gives a fast visual summary of your breadth — important
+      for the Renaissance man identity. Displayed as a wrapped
+      row of pill-shaped tags.
+
+      TO CUSTOMIZE: Add or remove <span class="interest-tag">
+      elements. Keep labels short — two to four words each.
+    ========================================================== -->
+    <section class="content-section" aria-label="Areas of interest">
+
+      <p class="section-label">Domains</p>
+      <h2 class="section-heading">Areas of Interest</h2>
+
+      <div class="interests-grid">
+        <!-- Professional interests -->
+        <span class="interest-tag">Sampling Methodology</span>
+        <span class="interest-tag">Stylostatistics</span>
+        <span class="interest-tag">Operations Research</span>
+        <span class="interest-tag">Demography</span>
+        <span class="interest-tag">Game Theory</span>
+        <span class="interest-tag">Decision Theory</span>
+        <span class="interest-tag">GenAI &amp; LLMs</span>
+        <span class="interest-tag">Project Management</span>
+        <!-- Intellectual interests -->
+        <span class="interest-tag">Early Modern History</span>
+        <span class="interest-tag">Foreign Policy</span>
+        <span class="interest-tag">Urban Planning</span>
+        <span class="interest-tag">Social Psychology</span>
+        <span class="interest-tag">Baroque Music</span>
+        <span class="interest-tag">Renaissance Art</span>
+        <span class="interest-tag">Anglican Theology</span>
+        <span class="interest-tag">Philosophy of Science</span>
+      </div>
+
+    </section>
+
+  </div><!-- end .page-wrapper -->
+
+  <!-- ============================================================
+    FOOTER: Appears at the bottom of every page. Contains your
+    contact email and links to external profiles.
+
+    <a href="mailto:..."> opens the visitor's email client.
+    target="_blank" opens links in a new browser tab.
+    rel="noopener" is a security best practice for external links.
+
+    TO CUSTOMIZE: Update the email address and add or remove
+    the external profile links as needed.
+  ============================================================ -->
+  <footer>
+    <div class="footer-inner">
+
+      <!-- Footer name and tagline -->
+      <p class="footer-name">Josiah Leinbach</p>
+      <p class="footer-tagline">Statistician&ensp;·&ensp;Systems Thinker&ensp;·&ensp;Renaissance Man</p>
+
+      <!-- Contact and external links -->
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="mailto:josiahleinbach@gmail.com">josiahleinbach@gmail.com</a>
+        <a href="https://josiahleinbach.substack.com" target="_blank" rel="noopener">Substack</a>
+        <a href="https://github.com/josiah-leinbach" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+
+      <!-- Copyright line. Update the year manually each January,
+           or ask about a JavaScript solution to do it automatically. -->
+      <p class="footer-copy">&copy; 2025 Josiah Leinbach. All rights reserved.</p>
+
     </div>
+  </footer>
+
 </body>
 </html>
