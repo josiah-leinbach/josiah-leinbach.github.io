@@ -212,7 +212,7 @@
   font-size: 1rem;         /* 16px */
   font-weight: 400;
   font-style: italic;      /* Italics distinguish title from employer */
-  color: var(--color-text-body);
+  color: var(--color-text-primary);
   flex: 1;                 /* Allow title to take available space */
 }
 
@@ -256,7 +256,7 @@
 .cv-bullets li {
   font-family: var(--font-serif);
   font-size: 0.9375rem;    /* 15px — slightly smaller than body for density */
-  color: var(--color-text-primary);
+  color: var(--color-text-body);
   line-height: 1.75;
   margin-bottom: 0.35rem;
 
