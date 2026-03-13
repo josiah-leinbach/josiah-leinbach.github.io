@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<!--
+  JOSIAH LEINBACH — PROFESSIONAL PORTFOLIO
+  writing.html — Writing Page
+
+  This page describes Josiah's public writing at Bletchleyism
+  and links to the Substack.
+
+  UPDATING THE TEXT:
+  The statement text is inside <p class="writing-statement">.
+  Edit the text between the <p> tags directly.
+
+  UPDATING THE SUBSTACK LINK:
+  Find the <a class="profile-link"> element and update
+  the href="..." value if the URL ever changes.
+-->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Writing by Josiah Leinbach — Bletchleyism, a Substack on history, statistics, and interdisciplinary thought.">
+  <title>Writing — Josiah Leinbach</title>
+
+  <!-- Google Fonts: same as every other page -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+
+  <!-- Shared design system -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Writing page styles: shares contact.css since the layout
+       is structurally identical to the Contact page. No separate
+       writing.css is needed — this keeps the codebase lean.
+       If the Writing page ever diverges significantly in layout,
+       create a writing.css at that point. -->
+  <link rel="stylesheet" href="contact.css">
+</head>
+
+<body>
+
+  <!-- ============================================================
+    NAVIGATION: "Writing" is the active link on this page.
+  ============================================================ -->
+  <nav aria-label="Main navigation">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="writing.html" class="active">Writing</a></li>
+      <li><a href="cv.html">CV</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-wrapper">
+
+    <!-- ==========================================================
+      WRITING MONUMENT
+      Centered layout, structurally identical to the Contact page.
+      Reuses .contact-monument, .contact-heading, and the shared
+      ornamental rule from styles.css and contact.css.
+    ========================================================== -->
+    <div class="contact-monument">
+
+      <!-- Section label: Gill Sans small caps in gold -->
+      <p class="section-label">Public Writing</p>
+
+      <!-- Page heading -->
+      <h1 class="contact-heading">Writing</h1>
+
+      <!-- Ornamental rule beneath the heading -->
+      <div class="ornamental-rule">
+        <span class="ornament">✦</span>
+      </div>
+
+      <!-- Writing statement: Cormorant italic, same register as
+           the epigraph on the home page and the statement on
+           the Contact page. "Bletchleyism" appears as plain text
+           here — the standalone link block below it is the
+           destination, so no inline link is needed. -->
+      <p class="contact-statement">
+        Few topics draw together my disparate passions of history,
+        statistical methods, and military history as does Bletchley Park 
+        and the breaking of German ciphers during the Second World War.
+        In keeping with Bletchley Park's innovative and interdisciplinary
+        approach to problem-solving, I occasionally publish my thoughts
+        on sundry subjects — from 16th-century monarchism to social
+        applications of Game Theory — at Bletchleyism.
+      </p>
+
+      <!-- Narrow ornamental rule between statement and link block,
+           matching the treatment on the Contact page -->
+      <div class="ornamental-rule ornamental-rule--narrow">
+        <span class="ornament">✦</span>
+      </div>
+
+      <!-- Substack link block: same .profile-link treatment as
+           the profile blocks on the Contact page. Single block,
+           centered. Opens in a new tab. -->
+      <div class="contact-profiles">
+
+        <a href="https://josiahleinbach.substack.com"
+           target="_blank" rel="noopener"
+           class="profile-link">
+          <span class="profile-platform">Bletchleyism</span>
+          <span class="profile-handle">josiahleinbach.substack.com</span>
+        </a>
+
+      </div>
+
+    </div><!-- end .contact-monument -->
+
+  </div><!-- end .page-wrapper -->
+
+  <!-- ============================================================
+    FOOTER: identical across all pages.
+  ============================================================ -->
+  <footer>
+    <div class="footer-inner">
+      <p class="footer-name">Josiah Leinbach</p>
+      <p class="footer-tagline">Statistician&ensp;·&ensp;Systems Thinker&ensp;·&ensp;Renaissance Man</p>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="mailto:josiahleinbach@gmail.com">josiahleinbach@gmail.com</a>
+        <a href="https://josiahleinbach.substack.com" target="_blank" rel="noopener">Substack</a>
+        <a href="https://github.com/josiah-leinbach" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-copy">&copy; 2025 Josiah Leinbach. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
