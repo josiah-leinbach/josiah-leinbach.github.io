@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<!--
+  JOSIAH LEINBACH — PROFESSIONAL PORTFOLIO
+  cv.html — Curriculum Vitae Page
+
+  PAGE STRUCTURE:
+  1. Nav + Page Header (with PDF download button)
+  2. Professional Experience
+  3. Education
+  4. Skills & Competencies
+  5. Honors & Awards
+  6. Footer
+
+  ADDING A NEW EXPERIENCE ENTRY:
+  Copy a full <article class="cv-entry"> block within the
+  appropriate <section class="cv-section"> and update the text.
+  The structure of each entry is explained inline below.
+
+  PDF DOWNLOAD:
+  The "View PDF" button links to cv.pdf in the same folder.
+  When you update your resume, replace cv.pdf in your repository
+  root and the button will automatically link to the new version.
+  No changes to this HTML file are needed.
+-->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Curriculum vitae of Josiah Leinbach — statistician, systems thinker, and Renaissance man.">
+  <title>CV — Josiah Leinbach</title>
+
+  <!-- Google Fonts: same as every other page -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+
+  <!-- Shared design system -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- CV-specific layout styles -->
+  <link rel="stylesheet" href="cv.css">
+</head>
+
+<body>
+
+  <!-- ============================================================
+    NAVIGATION: "CV" is the active link on this page.
+  ============================================================ -->
+  <nav aria-label="Main navigation">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="writing.html">Writing</a></li>
+      <li><a href="cv.html" class="active">CV</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-wrapper">
+
+    <!-- ==========================================================
+      PAGE HEADER
+      Includes the PDF download button. The button uses
+      target="_blank" to open the PDF in a new browser tab
+      rather than navigating away from this page.
+      rel="noopener" is a security best practice for all
+      target="_blank" links.
+    ========================================================== -->
+    <header class="page-header">
+      <p class="section-label">Curriculum Vitae</p>
+      <h1 class="page-title">Josiah Leinbach</h1>
+
+      <!-- Credentials line: degrees displayed beneath the name,
+           in the style of formal academic headings -->
+      <p class="cv-credentials">M.S., M.A.</p>
+
+      <div class="ornamental-rule">
+        <span class="ornament">✦</span>
+      </div>
+
+      <!-- PDF download button: opens cv.pdf in a new tab.
+           When you upload a new PDF, rename it cv.pdf and
+           place it in the repository root — no code changes needed. -->
+      <a href="cv.pdf" target="_blank" rel="noopener" class="cv-pdf-btn">
+        View PDF &rarr;
+      </a>
+    </header>
+
+    <!-- ==========================================================
+      SECTION: PROFESSIONAL EXPERIENCE
+
+      Each position is a <article class="cv-entry"> containing:
+        .cv-entry-header  — employer name + location (one row)
+        .cv-role-row      — job title + dates (one row)
+        .cv-bullets       — achievement bullet points
+
+      Some employers have multiple roles (e.g. BGSU has Graduate
+      Researcher and Statistics Tutor). These are handled by
+      stacking two .cv-role-row + .cv-bullets pairs inside one
+      cv-entry, under the same employer header.
+    ========================================================== -->
+    <section class="cv-section" aria-label="Professional experience">
+
+      <h2 class="cv-section-heading">Professional Experience</h2>
+
+      <!-- ---- Florida Department of Education ---- -->
+      <article class="cv-entry">
+
+        <!-- Employer header: name left, location right -->
+        <div class="cv-entry-header">
+          <span class="cv-employer">Florida Department of Education</span>
+          <span class="cv-location">Tallahassee, FL</span>
+        </div>
+
+        <!-- Role row: title left, dates right -->
+        <div class="cv-role-row">
+          <span class="cv-title">Director of Research and Analytics, Florida College System</span>
+          <span class="cv-dates">Jan 2026 – Present</span>
+        </div>
+
+        <!-- Achievement bullets: use outcome-focused language.
+             Each <li> is one bullet point. -->
+        <ul class="cv-bullets">
+          <li>Oversee statutory reporting for the Florida College System.</li>
+          <li>Lead a collaborative taskforce producing an operations manual to assist colleges undertaking ERP migrations.</li>
+          <li>Conduct long-term studies on student enrollment, student outcomes, and college efficiency.</li>
+          <li>Build internal databases and applications to expedite data collation, aggregation, search, and summary.</li>
+          <li>Advise FCS chancellor and executive vice-chancellor on AI-related topics.</li>
+        </ul>
+
+      </article>
+
+      <!-- ---- Designetics ---- -->
+      <article class="cv-entry">
+
+        <div class="cv-entry-header">
+          <span class="cv-employer">Designetics</span>
+          <span class="cv-location">Holland, OH</span>
+        </div>
+
+        <div class="cv-role-row">
+          <span class="cv-title">Data Scientist <span class="cv-title-note">(contract)</span></span>
+          <span class="cv-dates">Oct 2025 – Present</span>
+        </div>
+
+        <ul class="cv-bullets">
+          <li>Built Shiny applications to automate defect report generation and increase scope of defect tracking.</li>
+          <li>Implemented a proprietary inventory itemization nomenclature linking inventory systems to manufacturing and reporting systems.</li>
+        </ul>
+
+      </article>
+
+      <!-- ---- Bowling Green State University ----
+           Multiple roles at one employer: the employer header
+           appears once; each role gets its own .cv-role-row
+           and .cv-bullets pair beneath it. -->
+      <article class="cv-entry">
+
+        <div class="cv-entry-header">
+          <span class="cv-employer">Bowling Green State University</span>
+          <span class="cv-location">Bowling Green, OH</span>
+        </div>
+
+        <!-- Role 1: Graduate Researcher -->
+        <div class="cv-role-row">
+          <span class="cv-title">Graduate Researcher</span>
+          <span class="cv-dates">Oct 2022 – Aug 2025</span>
+        </div>
+
+        <ul class="cv-bullets">
+          <li>Applied clustering algorithms to maximize coverage and minimize route-lengths for potential new university shuttle routes based on student living density; used vehicle routing problem (VRP) heuristics to corroborate findings.</li>
+          <li>Developed a predictive model for NCAA basketball players likely to enter the transfer portal; wrote a dynamic web-scraping script to curate data from recruiting and transfer-portal websites.</li>
+          <li>Designed and carried out prompt-engineering factorial experiments on LLMs to determine prompt-sensitivity and response-variability in survey question generation; measured quality with Survey Quality Predictor (SQP) metrics.</li>
+        </ul>
+
+        <!-- Role 2: Statistics Tutor — no location repeated -->
+        <div class="cv-role-row cv-role-row--secondary">
+          <span class="cv-title">Statistics Tutor</span>
+          <span class="cv-dates">2022 – 2023</span>
+        </div>
+
+        <ul class="cv-bullets">
+          <li>Tutored undergraduate business students in statistics and business analytics courses.</li>
+        </ul>
+
+      </article>
+
+      <!-- ---- Revere Bible College ---- -->
+      <article class="cv-entry">
+
+        <div class="cv-entry-header">
+          <span class="cv-employer">Revere Bible College</span>
+          <span class="cv-location">Monclova, OH</span>
+        </div>
+
+        <div class="cv-role-row">
+          <span class="cv-title">Instructor</span>
+          <span class="cv-dates">Jan 2024 – Dec 2024</span>
+        </div>
+
+        <ul class="cv-bullets">
+          <li>Taught courses and developed curriculum for POLI-1200 (The American Heritage) and POLI-2100 (Christian Political Theory).</li>
+        </ul>
+
+      </article>
+
+      <!-- ---- Prolego Press ---- -->
+      <article class="cv-entry">
+
+        <div class="cv-entry-header">
+          <span class="cv-employer">Prolego Press</span>
+          <span class="cv-location">Bowling Green, OH</span>
+        </div>
+
+        <div class="cv-role-row">
+          <span class="cv-title">Editor</span>
+          <span class="cv-dates">Jul 2023 – Present</span>
+        </div>
+
+        <ul class="cv-bullets">
+          <li>Manage republication of historical texts, including research for footnotes and annotations; wrote style-guide for 16th and 17th century manuscripts.</li>
+          <li>Write OCR scripts and integrate LLMs into publication workflows.</li>
+          <li>Coordinate reviewers, marketers, and distributors.</li>
+          <li>Oversee the Whitaker Fellowship summer program for Hillsdale College undergraduates.</li>
+        </ul>
+
+      </article>
+
+      <!-- ---- Alliance Quizzing ----
+           Two roles at one organization, same treatment as BGSU -->
+      <article class="cv-entry">
+
+        <div class="cv-entry-header">
+          <span class="cv-employer">Alliance Quizzing</span>
+          <span class="cv-location">Maumee, OH</span>
+        </div>
+
+        <!-- Role 1: National Executive Board -->
+        <div class="cv-role-row">
+          <span class="cv-title">National Executive Board — Chair for Institutional Advancement</span>
+          <span class="cv-dates">2023 – Present</span>
+        </div>
+
+        <ul class="cv-bullets">
+          <li>Create bilateral institutional partnerships to ensure future organizational growth.</li>
+          <li>Reduced national executive board's yearly financial obligations by an average of 34% from 2023–25.</li>
+          <li>Wrote the executive board's new governing constitution, bylaws, and SOPs to guide the board through a significant institutional transition.</li>
+          <li>Established data-reporting procedures to track participation and retention rates across all districts; use reported and event data to guide marketing decisions.</li>
+        </ul>
+
+        <!-- Role 2: Great Lakes District -->
+        <div class="cv-role-row cv-role-row--secondary">
+          <span class="cv-title">Great Lakes District — Assistant District Coordinator</span>
+          <span class="cv-dates">2020 – Present</span>
+        </div>
+
+        <ul class="cv-bullets">
+          <li>Oversee all yearly district events and administer two large inter-district events.</li>
+          <li>Implemented reforms leading to 138% total growth (15.5% annualized) in participants.</li>
+        </ul>
+
+      </article>
+
+      <!-- ---- Ring Digital ---- -->
+      <article class="cv-entry">
+
+        <div class="cv-entry-header">
+          <span class="cv-employer">Ring Digital</span>
+          <span class="cv-location">Maumee, OH</span>
+        </div>
+
+        <div class="cv-role-row">
+          <span class="cv-title">Research Analyst</span>
+          <span class="cv-dates">Feb 2021 – Apr 2022</span>
+        </div>
+
+        <ul class="cv-bullets">
+          <li>Leveraged client data to prepare analytical reports on consumer and voting patterns.</li>
+          <li>Created detailed candidate profiles and tracked election developments for political clients.</li>
+          <li>Analyzed customer and voter survey data for statistically significant results and trends.</li>
+        </ul>
+
+      </article>
+
+      <!-- ---- Checkmate Chess Academy ---- -->
+      <article class="cv-entry">
+
+        <div class="cv-entry-header">
+          <span class="cv-employer">Checkmate Chess Academy</span>
+          <span class="cv-location">Maumee, OH</span>
+        </div>
+
+        <div class="cv-role-row">
+          <span class="cv-title">Chess Coach</span>
+          <span class="cv-dates">2020 – 2023</span>
+        </div>
+
+        <ul class="cv-bullets">
+          <li>Taught group and individual chess lessons to middle and high school students.</li>
+          <li>Organized classical and blitz chess tournaments.</li>
+        </ul>
+
+      </article>
+
+      <!-- ---- Hillsdale College — Winston Churchill Fellow ---- -->
+      <article class="cv-entry">
+
+        <div class="cv-entry-header">
+          <span class="cv-employer">Hillsdale College</span>
+          <span class="cv-location">Hillsdale, MI</span>
+        </div>
+
+        <div class="cv-role-row">
+          <span class="cv-title">Winston Churchill Fellow in History and Politics</span>
+          <span class="cv-dates">2017 – 2020</span>
+        </div>
+
+        <ul class="cv-bullets">
+          <li>Assisted in publishing Vols. 21, 22, and 23 of <em>The Churchill Documents</em> (23 volumes, 33,200 pages); researched footnotes and annotations, edited transcribed documents, and instructed new fellows in editorial style.</li>
+          <li>Invented metadata cataloging system for Sir Martin Gilbert's personal archive (65,000 documents).</li>
+        </ul>
+
+      </article>
+
+    </section>
+
+    <!-- ==========================================================
+      SECTION: EDUCATION
+
+      Simpler than experience — each degree is a cv-entry with
+      an institution header and a degree row. No bullets needed
+      unless you want to add honors, relevant coursework, or
+      a thesis title.
+    ========================================================== -->
+    <section class="cv-section" aria-label="Education">
+
+      <h2 class="cv-section-heading">Education</h2>
+
+      <!-- ---- BGSU ---- -->
+      <article class="cv-entry">
+
+        <div class="cv-entry-header">
+          <span class="cv-employer">Bowling Green State University</span>
+          <span class="cv-location">Bowling Green, OH</span>
+        </div>
+
+        <div class="cv-role-row">
+          <span class="cv-title">M.A., Economics</span>
+          <span class="cv-dates">2025</span>
+        </div>
+
+        <div class="cv-role-row cv-role-row--secondary">
+          <span class="cv-title">M.S., Applied Statistics and Operations Research</span>
+          <span class="cv-dates">2024</span>
+        </div>
+
+      </article>
+
+      <!-- ---- Hillsdale College ---- -->
+      <article class="cv-entry">
+
+        <div class="cv-entry-header">
+          <span class="cv-employer">Hillsdale College</span>
+          <span class="cv-location">Hillsdale, MI</span>
+        </div>
+
+        <div class="cv-role-row">
+          <span class="cv-title">B.A., History</span>
+          <span class="cv-dates">2020</span>
+        </div>
+
+      </article>
+
+    </section>
+
+    <!-- ==========================================================
+      SECTION: SKILLS & COMPETENCIES
+
+      Displayed as two labeled columns: Technical and Professional.
+      Each column is a .cv-skills-group containing a heading and
+      a list of items.
+
+      TO ADD A SKILL: add a new <li> inside the appropriate <ul>.
+      TO ADD A CATEGORY: copy a .cv-skills-group block and update
+      the heading and list items.
+    ========================================================== -->
+    <section class="cv-section" aria-label="Skills and competencies">
+
+      <h2 class="cv-section-heading">Skills &amp; Competencies</h2>
+
+      <div class="cv-skills-grid">
+
+        <!-- Technical skills column -->
+        <div class="cv-skills-group">
+          <p class="cv-skills-label">Technical</p>
+          <ul class="cv-skills-list">
+            <li>Statistical Modeling</li>
+            <li>Bayesian Analysis</li>
+            <li>Experimental Design</li>
+            <li>Sample Design</li>
+            <li>Econometrics</li>
+            <li>Machine Learning</li>
+            <li>Monte Carlo Simulation</li>
+            <li>R</li>
+            <li>Python</li>
+          </ul>
+        </div>
+
+        <!-- Professional skills column -->
+        <div class="cv-skills-group">
+          <p class="cv-skills-label">Professional</p>
+          <ul class="cv-skills-list">
+            <li>Deploy analytic and predictive statistical models</li>
+            <li>Coordinate teams on large-scale, long-range projects</li>
+            <li>Establish innovative, mutually beneficial partnerships</li>
+            <li>Communicate technical concepts to non-technical stakeholders</li>
+            <li>Understand and articulate different points of view</li>
+            <li>Conduct public presentations and field questions</li>
+          </ul>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ==========================================================
+      SECTION: HONORS & AWARDS
+
+      Each award is a .cv-honor-entry with:
+        .cv-honor-name   — the award name in Cormorant
+        .cv-honor-sub    — essay title or subtitle (optional)
+        .cv-honor-org    — awarding institution
+        .cv-honor-year   — year, right-aligned
+        .cv-honor-link   — external link (optional)
+
+      TO ADD AN AWARD: copy a full .cv-honor-entry block.
+    ========================================================== -->
+    <section class="cv-section" aria-label="Honors and awards">
+
+      <h2 class="cv-section-heading">Honors &amp; Awards</h2>
+
+      <!-- Award 1: 3MT -->
+      <div class="cv-honor-entry">
+        <div class="cv-honor-main">
+          <p class="cv-honor-name">3-Minute Thesis — Regional Semi-Finalist</p>
+          <p class="cv-honor-org">Midwest Association of Graduate Schools</p>
+        </div>
+        <div class="cv-honor-aside">
+          <span class="cv-honor-year">2025</span>
+          <!-- External link to the recorded presentation -->
+          <a href="https://youtu.be/_E_LWs7-_aI" target="_blank" rel="noopener" class="cv-honor-link">
+            Watch recording &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- Award 2: Hoover Institution — includes essay title and link -->
+      <div class="cv-honor-entry">
+        <div class="cv-honor-main">
+          <p class="cv-honor-name">Director's Award for Public Policy Research</p>
+          <!-- Essay subtitle: displayed in Cormorant italic beneath the award name.
+               The full title is shown here per the design decision made earlier. -->
+          <p class="cv-honor-sub">
+            <em>"'Till Death (Or Taxes) Us Do Part: Removing Marriage Penalties
+            in the Federal EITC"</em>
+          </p>
+          <p class="cv-honor-org">Hoover Institution, Stanford University</p>
+        </div>
+        <div class="cv-honor-aside">
+          <span class="cv-honor-year">2024</span>
+          <!-- Link to the published essay on the Hoover Institution website -->
+          <a href="https://www.hoover.org/til-death-or-taxes-us-do-part"
+             target="_blank" rel="noopener" class="cv-honor-link">
+            Read essay &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- Award 3: Sullivan Award -->
+      <div class="cv-honor-entry">
+        <div class="cv-honor-main">
+          <p class="cv-honor-name">James A. Sullivan Award</p>
+          <p class="cv-honor-org">Bowling Green State University — outstanding service to the statistics department</p>
+        </div>
+        <div class="cv-honor-aside">
+          <span class="cv-honor-year">2024</span>
+        </div>
+      </div>
+
+      <!-- Award 4: Gilbert Award -->
+      <div class="cv-honor-entry">
+        <div class="cv-honor-main">
+          <p class="cv-honor-name">Arlan P. Gilbert Award</p>
+          <p class="cv-honor-org">Hillsdale College — original historical research</p>
+        </div>
+        <div class="cv-honor-aside">
+          <span class="cv-honor-year">2020</span>
+        </div>
+      </div>
+
+      <!-- Publications crosslink: a brief note directing visitors
+           to the full Publications page rather than repeating
+           the entire list here. -->
+      <div class="cv-publications-note">
+        <p>
+          For peer-reviewed papers, theses, edited volumes, and articles,
+          see the <a href="publications.html">Publications</a> page.
+        </p>
+      </div>
+
+    </section>
+
+  </div><!-- end .page-wrapper -->
+
+  <!-- ============================================================
+    FOOTER: identical across all pages.
+  ============================================================ -->
+  <footer>
+    <div class="footer-inner">
+      <p class="footer-name">Josiah Leinbach</p>
+      <p class="footer-tagline">Statistician&ensp;·&ensp;Systems Thinker&ensp;·&ensp;Renaissance Man</p>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="mailto:josiahleinbach@gmail.com">josiahleinbach@gmail.com</a>
+        <a href="https://josiahleinbach.substack.com" target="_blank" rel="noopener">Substack</a>
+        <a href="https://github.com/josiah-leinbach" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-copy">&copy; 2025 Josiah Leinbach. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
