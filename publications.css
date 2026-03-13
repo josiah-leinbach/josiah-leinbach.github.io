@@ -87,11 +87,10 @@
    on the home page, but larger since it's a navigational heading. */
 .pub-section-heading {
   font-family: var(--font-sans);
-  font-size: 1rem;    /* 16px */
-  font-weight: 600;
+  font-size: 1.125rem;    /* 16px */
+  font-weight: 400;
   font-variant: small-caps;
   letter-spacing: 0.08em;
-  text-transform: lowercase;
   color: var(--color-accent);
   margin-bottom: 2rem;
 }
