@@ -145,7 +145,7 @@
    as .work-tag on the home page and .pub-badge labels */
 .project-tag {
   font-family: var(--font-sans);
-  font-size: 0.625rem;     /* 10px */
+  font-size: 1rem;     /* 16px */
   font-variant: small-caps;
   letter-spacing: 0.18em;
   text-transform: lowercase;
