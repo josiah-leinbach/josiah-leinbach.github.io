@@ -77,6 +77,7 @@
   font-size: 1.125rem;    /* 18px — slightly larger than body,
                              matching the epigraph size on index.html */
   color: var(--color-text-body);
+  text-align: justify;
   line-height: 1.85;
   margin-bottom: 2rem;
 }
