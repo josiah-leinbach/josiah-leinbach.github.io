@@ -375,6 +375,7 @@ nav a.active {
      border-top draws a line above the section's padding box. */
   border-top: 1px solid var(--color-accent-dim);
   margin-top: var(--section-gap);
+  text-align: justify;
 }
 
 /* The first content section after the hero doesn't need a top margin
