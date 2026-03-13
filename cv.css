@@ -1,0 +1,513 @@
+/*
+  JOSIAH LEINBACH — PROFESSIONAL PORTFOLIO
+  cv.css — CV Page Styles
+
+  Loaded after styles.css, which supplies the shared design tokens
+  (colors, fonts, nav, footer, page-wrapper, ornamental-rule, etc.).
+  This file handles only the CV-specific layout components.
+
+  ORGANIZATION:
+  1.  Page Header & Credentials
+  2.  PDF Download Button
+  3.  CV Section Wrapper
+  4.  CV Entry (employer block)
+  5.  Entry Header (employer name + location)
+  6.  Role Row (job title + dates)
+  7.  Achievement Bullets
+  8.  Skills Grid
+  9.  Honors & Awards
+  10. Publications Crosslink Note
+  11. Responsive Adjustments
+*/
+
+
+/* ================================================================
+  1. PAGE HEADER & CREDENTIALS
+
+  Reuses .page-header and .page-title from publications.css
+  conventions. The credentials line ("M.S., M.A.") is unique
+  to the CV page — styled in Cormorant italic beneath the name.
+================================================================ */
+
+.page-header {
+  text-align: center;
+  padding: 4rem 0 3rem;
+}
+
+.page-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.25rem, 6vw, 3.25rem);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  line-height: 1.1;
+  /* No bottom margin — the credentials line sits immediately below */
+  margin-bottom: 0.35rem;
+}
+
+/* Credentials: degrees displayed in the formal academic style,
+   immediately beneath the name. Cormorant italic, muted color. */
+.cv-credentials {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.04em;
+  margin-bottom: 1.5rem;
+}
+
+
+/* ================================================================
+  2. PDF DOWNLOAD BUTTON
+
+  Styled as an outlined text link — consistent with the Scholar's
+  Study aesthetic. No filled background; border in gold.
+  Opens cv.pdf in a new browser tab (target="_blank" in HTML).
+================================================================ */
+
+.cv-pdf-btn {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;        /* 12px */
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  padding: 0.5rem 1.25rem;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  margin-top: 0.25rem;
+}
+
+/* On hover: fill the button with gold, switch text to dark.
+   This is the only place in the design where gold is used as
+   a background — reserved for the primary call-to-action. */
+.cv-pdf-btn:hover {
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+  opacity: 1;
+  text-decoration: none;
+}
+
+
+/* ================================================================
+  3. CV SECTION WRAPPER
+
+  Each major section (Experience, Education, Skills, Honors)
+  is a <section class="cv-section">. This handles the spacing
+  and top rule between sections — same pattern as .content-section
+  on the home page, with tighter spacing appropriate for a
+  dense CV layout.
+================================================================ */
+
+.cv-section {
+  margin-top: 3.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--color-accent-dim);
+}
+
+/* Section heading: Gill Sans small caps in gold — the same
+   signpost style used throughout the site */
+.cv-section-heading {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;      /* 11px */
+  font-variant: small-caps;
+  letter-spacing: 0.22em;
+  text-transform: lowercase;
+  color: var(--color-accent);
+  margin-bottom: 1.75rem;
+}
+
+
+/* ================================================================
+  4. CV ENTRY (employer block)
+
+  Each employer or institution is a <article class="cv-entry">.
+  Entries are separated by a subtle bottom border. The last
+  entry in each section has no border (see :last-child rule).
+================================================================ */
+
+.cv-entry {
+  padding-bottom: 1.75rem;
+  margin-bottom: 1.75rem;
+  border-bottom: 1px solid var(--color-accent-dim);
+}
+
+.cv-entry:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+
+/* ================================================================
+  5. ENTRY HEADER (employer name + location)
+
+  A single row with the employer name on the left and the city
+  on the right. Uses flexbox with space-between to push them
+  to opposite ends.
+================================================================ */
+
+.cv-entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;  /* Align text baselines, not box tops */
+  gap: 1rem;
+  margin-bottom: 0.4rem;
+}
+
+/* Employer name: Cormorant semibold — prominent but not as large
+   as page section headings. The employer is the anchor of the entry. */
+.cv-employer {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;     /* 18px */
+  font-weight: 600;
+  color: var(--color-text-primary);
+  /* flex-shrink: 0 prevents the employer name from being squeezed
+     when the location text is long */
+  flex-shrink: 0;
+}
+
+/* Location: Gill Sans, muted, right-aligned */
+.cv-location {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;      /* 12px */
+  font-weight: 300;
+  color: var(--color-text-muted);
+  letter-spacing: 0.06em;
+  white-space: nowrap;     /* Prevents city names from wrapping */
+  text-align: right;
+}
+
+
+/* ================================================================
+  6. ROLE ROW (job title + dates)
+
+  Each position at an employer gets its own role row. The job
+  title sits on the left, dates on the right — same flexbox
+  space-between pattern as the entry header, but smaller.
+
+  For employers with multiple roles, a secondary role row
+  (.cv-role-row--secondary) has a top margin to separate it
+  from the bullets of the role above.
+================================================================ */
+
+.cv-role-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Secondary role rows (second or third position at same employer):
+   extra top margin creates visual separation from the bullets above */
+.cv-role-row--secondary {
+  margin-top: 1rem;
+}
+
+/* Job title: Cormorant, body color (slightly dimmer than employer) */
+.cv-title {
+  font-family: var(--font-serif);
+  font-size: 1rem;         /* 16px */
+  font-weight: 400;
+  font-style: italic;      /* Italics distinguish title from employer */
+  color: var(--color-text-body);
+  flex: 1;                 /* Allow title to take available space */
+}
+
+/* Parenthetical note within a title (e.g. "contract"):
+   Gill Sans, smaller, muted — subordinate to the title itself */
+.cv-title-note {
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  font-weight: 300;
+}
+
+/* Dates: Gill Sans, muted, right-aligned, no wrap */
+.cv-dates {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;      /* 12px */
+  font-weight: 300;
+  color: var(--color-text-muted);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  text-align: right;
+}
+
+
+/* ================================================================
+  7. ACHIEVEMENT BULLETS
+
+  The bulleted list of accomplishments for each role.
+  Custom bullet style: a small gold em-dash (—) replaces the
+  default browser bullet dot, consistent with the site's
+  typographic character.
+================================================================ */
+
+.cv-bullets {
+  list-style: none;        /* Remove default bullet */
+  margin-top: 0.5rem;
+  padding-left: 0;
+}
+
+.cv-bullets li {
+  font-family: var(--font-serif);
+  font-size: 0.9375rem;    /* 15px — slightly smaller than body for density */
+  color: var(--color-text-body);
+  line-height: 1.75;
+  margin-bottom: 0.35rem;
+
+  /* Custom bullet: padding-left creates space for the pseudo-element */
+  padding-left: 1.1rem;
+  position: relative;
+}
+
+/* The bullet character itself: a small gold dash, absolutely
+   positioned to the left of the list item text */
+.cv-bullets li::before {
+  content: "–";            /* En-dash — more refined than a hyphen */
+  position: absolute;
+  left: 0;
+  color: var(--color-accent);
+  opacity: 0.6;
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: 0.875rem;
+  line-height: 1.85;       /* Match the li line-height to align vertically */
+}
+
+.cv-bullets li:last-child {
+  margin-bottom: 0;
+}
+
+
+/* ================================================================
+  8. SKILLS GRID
+
+  Two columns: Technical and Professional. Each column is a
+  .cv-skills-group containing a label and a list.
+
+  Uses CSS Grid with auto-fit so it collapses to one column
+  on narrow screens.
+================================================================ */
+
+.cv-skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem 3rem;        /* Row gap, column gap */
+}
+
+/* Column heading: same small-caps Gill Sans as section labels,
+   but in a slightly dimmer gold — subordinate to the section
+   heading above it */
+.cv-skills-label {
+  font-family: var(--font-sans);
+  font-size: 0.625rem;     /* 10px */
+  font-variant: small-caps;
+  letter-spacing: 0.18em;
+  text-transform: lowercase;
+  color: var(--color-accent);
+  opacity: 0.75;
+  margin-bottom: 0.75rem;
+}
+
+/* Skills list: no bullets — clean left edge */
+.cv-skills-list {
+  list-style: none;
+  padding: 0;
+}
+
+.cv-skills-list li {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;    /* 13px */
+  font-weight: 300;
+  color: var(--color-text-body);
+  line-height: 1.7;
+  /* Left border acts as a quiet visual marker in place of bullets */
+  padding-left: 0.75rem;
+  border-left: 1px solid var(--color-accent-dim);
+  margin-bottom: 0.25rem;
+}
+
+.cv-skills-list li:last-child {
+  margin-bottom: 0;
+}
+
+
+/* ================================================================
+  9. HONORS & AWARDS
+
+  Each award is a .cv-honor-entry — a flex row with the main
+  content (name, subtitle, institution) on the left and the
+  year and optional link on the right.
+================================================================ */
+
+.cv-honor-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--color-accent-dim);
+}
+
+.cv-honor-entry:first-of-type {
+  padding-top: 0;
+}
+
+.cv-honor-entry:last-of-type {
+  border-bottom: none;
+}
+
+/* Left column: award name, subtitle, institution */
+.cv-honor-main {
+  flex: 1;
+}
+
+/* Award name: Cormorant, vellum — prominent */
+.cv-honor-name {
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;    /* 17px */
+  font-weight: 600;
+  color: var(--color-text-primary);
+  line-height: 1.3;
+  margin-bottom: 0.2rem;
+}
+
+/* Essay subtitle: Cormorant italic, body color — sits beneath the
+   award name, visually subordinate but clearly legible */
+.cv-honor-sub {
+  font-family: var(--font-serif);
+  font-size: 0.9375rem;    /* 15px */
+  font-style: italic;
+  color: var(--color-text-body);
+  line-height: 1.5;
+  margin-bottom: 0.2rem;
+}
+
+/* Awarding institution: Gill Sans, muted */
+.cv-honor-org {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;      /* 12px */
+  font-weight: 300;
+  color: var(--color-text-muted);
+  letter-spacing: 0.04em;
+}
+
+/* Right column: year and optional link, stacked vertically,
+   right-aligned */
+.cv-honor-aside {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+/* Year: Gill Sans, muted — same treatment as .cv-dates */
+.cv-honor-year {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: var(--color-text-muted);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+/* External link: same style as .pub-link on publications page */
+.cv-honor-link {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;    /* 11px */
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--color-accent);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+
+.cv-honor-link:hover {
+  opacity: 0.7;
+  text-decoration: underline;
+}
+
+
+/* ================================================================
+  10. PUBLICATIONS CROSSLINK NOTE
+
+  A brief note at the bottom of the Honors section directing
+  visitors to the full Publications page. Styled as a quiet
+  footer to the section — not a prominent call-to-action.
+================================================================ */
+
+.cv-publications-note {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-accent-dim);
+}
+
+.cv-publications-note p {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;    /* 13px */
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* The Publications link within the note: inherits gold from
+   the base <a> rule in styles.css — no override needed */
+
+
+/* ================================================================
+  11. RESPONSIVE ADJUSTMENTS
+
+  On narrow screens, a few layout changes improve readability:
+  - Employer header and role row switch from side-by-side to stacked
+  - Honor entries stack vertically
+  - Skills grid collapses to one column (handled by auto-fit)
+================================================================ */
+
+@media (max-width: 540px) {
+
+  /* Stack employer name and location vertically on small screens */
+  .cv-entry-header {
+    flex-direction: column;
+    gap: 0.15rem;
+    align-items: flex-start;
+  }
+
+  /* Stack job title and dates vertically on small screens */
+  .cv-role-row {
+    flex-direction: column;
+    gap: 0.1rem;
+    align-items: flex-start;
+  }
+
+  /* Dates: left-aligned when stacked */
+  .cv-dates {
+    text-align: left;
+  }
+
+  /* Honor entries: stack main content and aside vertically */
+  .cv-honor-entry {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  /* Honor aside: left-align when stacked */
+  .cv-honor-aside {
+    align-items: flex-start;
+    flex-direction: row;    /* Keep year and link side by side */
+    gap: 1rem;
+  }
+
+  /* Reduce page header top padding on small screens */
+  .page-header {
+    padding: 2.5rem 0 2rem;
+  }
+
+}
