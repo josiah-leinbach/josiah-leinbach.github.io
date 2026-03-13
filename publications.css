@@ -1,0 +1,385 @@
+/*
+  JOSIAH LEINBACH — PROFESSIONAL PORTFOLIO
+  publications.css — Publications Page Styles
+
+  This file contains ONLY styles specific to publications.html.
+  It works alongside styles.css, which handles the nav, footer,
+  typography utilities, and color variables shared across all pages.
+
+  LOAD ORDER MATTERS: In publications.html, styles.css is linked
+  first, then this file. That means rules here can override shared
+  rules where needed — intentionally and without breaking anything.
+
+  ORGANIZATION:
+  1. Page Header
+  2. Publication Sections (headings and spacing)
+  3. Publication Entry Layout (the two-column structure)
+  4. Publication Meta (year and badge — left column)
+  5. Publication Body (title, authors, venue — right column)
+  6. Publication Badges (status indicators)
+  7. Publication Links
+  8. Volume Sub-list
+  9. Responsive Adjustments
+*/
+
+
+/* ================================================================
+  1. PAGE HEADER
+
+  The title block at the top of the publications page.
+  Reuses the centered-monument pattern from the hero, but smaller
+  since this is a content page, not the home page.
+================================================================ */
+
+.page-header {
+  text-align: center;
+  /* Top padding: enough breathing room below the nav bar.
+     Bottom padding: space before the first publication section. */
+  padding: 4rem 0 3rem;
+}
+
+/* Page title: large Cormorant, same treatment as section headings
+   on the home page but slightly larger for the page title role */
+.page-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.25rem, 6vw, 3.25rem); /* Responsive scaling */
+  font-weight: 600;
+  color: var(--color-text-primary);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+/* Intro paragraph: a brief orienting sentence below the ornamental rule.
+   Cormorant italic, body color — understated and editorial. */
+.page-intro {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.0625rem;   /* 17px — matches body size */
+  color: var(--color-text-body);
+  line-height: 1.75;
+  max-width: 32rem;
+  margin: 0 auto;
+}
+
+/* The ornamental rule between the title and intro paragraph.
+   These classes (.ornamental-rule, .ornament) are defined in
+   styles.css — they work here automatically because styles.css
+   is loaded first. No need to redefine them. */
+
+
+/* ================================================================
+  2. PUBLICATION SECTIONS
+
+  Each category of publication (Papers, Theses, Articles, Books)
+  is wrapped in a <section class="pub-section"> element.
+================================================================ */
+
+.pub-section {
+  /* Top margin and border separate sections visually.
+     This mirrors the .content-section pattern on the home page. */
+  margin-top: 4rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--color-accent-dim);
+}
+
+/* Section heading: smaller than the page title.
+   Uses the same Gill Sans + small caps treatment as .section-label
+   on the home page, but larger since it's a navigational heading. */
+.pub-section-heading {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;    /* 11px */
+  font-variant: small-caps;
+  letter-spacing: 0.22em;
+  text-transform: lowercase;
+  color: var(--color-accent);
+  margin-bottom: 2rem;
+}
+
+
+/* ================================================================
+  3. PUBLICATION ENTRY LAYOUT
+
+  Each publication is an <article class="pub-entry"> containing
+  two child divs:
+    .pub-meta  — the narrow left column (year, badge)
+    .pub-body  — the wide right column (title, authors, etc.)
+
+  This uses CSS Grid for the two-column layout.
+  The grid template "80px 1fr" means:
+    - Left column (meta): fixed 80px wide
+    - Right column (body): fills all remaining space (1fr)
+================================================================ */
+
+.pub-entry {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+
+  /* gap: 1.5rem creates space between the two columns */
+  gap: 0 1.5rem;
+
+  /* Padding and border separate individual entries within a section */
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--color-accent-dim);
+}
+
+/* Remove the border from the last entry in each section —
+   the section itself has a top border, so a bottom border on
+   the last entry would create an awkward double-line gap. */
+.pub-entry:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* Also remove top padding from the first entry — the section
+   heading provides sufficient separation above it */
+.pub-entry:first-of-type {
+  padding-top: 0;
+}
+
+
+/* ================================================================
+  4. PUBLICATION META (left column)
+
+  Contains the year and the status badge.
+  Stacked vertically within the fixed 80px left column.
+================================================================ */
+
+.pub-meta {
+  /* Stack year and badge vertically, aligned to the right side
+     of the column (toward the body text) */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+
+  /* Slight top offset to align the year with the first line
+     of the title text in the right column */
+  padding-top: 0.15rem;
+}
+
+/* Year: Gill Sans, muted, right-aligned in the meta column */
+.pub-year {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;      /* 12px */
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  text-align: right;
+
+  /* white-space: nowrap prevents "2018–22" from wrapping across two lines */
+  white-space: nowrap;
+}
+
+
+/* ================================================================
+  5. PUBLICATION BODY (right column)
+
+  Contains title, authors, venue/journal, optional note, and links.
+================================================================ */
+
+.pub-body {
+  /* Small top padding to align with the year in the left column */
+  padding-top: 0.05rem;
+}
+
+/* Title: Cormorant italic — the most prominent element in each entry.
+   The <em> tag inside the HTML supplies the italic; these rules
+   set the size and color. */
+.pub-title {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;     /* 18px */
+  font-weight: 400;
+  color: var(--color-text-primary);
+  line-height: 1.4;
+  margin-bottom: 0.35rem;
+}
+
+/* Authors: Gill Sans, slightly smaller, body color.
+   Your name is wrapped in <strong> in the HTML — the bold
+   weight naturally makes it stand out in the author list. */
+.pub-authors {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;    /* 13px */
+  font-weight: 300;
+  color: var(--color-text-body);
+  margin-bottom: 0.2rem;
+}
+
+/* Your name within an author list: slightly brighter than
+   surrounding author names */
+.pub-authors strong {
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+/* Venue / journal name: Gill Sans, muted.
+   The <em> tag for the journal name inside pub-venue is handled
+   by the browser's default italic rendering. */
+.pub-venue {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;    /* 13px */
+  font-weight: 300;
+  color: var(--color-text-muted);
+  margin-bottom: 0.35rem;
+}
+
+/* Optional note: a small clarifying statement (role, status, award).
+   Gill Sans, smaller, in muted gold — visible but subordinate. */
+.pub-note {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;      /* 12px */
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-accent);
+  opacity: 0.8;
+  margin-top: 0.35rem;
+  margin-bottom: 0.35rem;
+}
+
+
+/* ================================================================
+  6. PUBLICATION BADGES
+
+  Small pill-shaped labels indicating the status or type of
+  each publication. Displayed in the left meta column.
+
+  Three badge variants, each with a different color treatment:
+  - badge-published: full gold — for completed, published work
+  - badge-review:   dimmer gold — for work under review
+  - badge-contrib:  steel blue — for contributory/supporting roles
+================================================================ */
+
+.pub-badge {
+  /* Shared badge styles */
+  font-family: var(--font-sans);
+  font-size: 0.5625rem;    /* 9px — deliberately small; it's a label, not content */
+  font-variant: small-caps;
+  letter-spacing: 0.12em;
+  text-transform: lowercase;
+  padding: 0.2rem 0.45rem;
+  border: 1px solid;       /* Border color set per variant below */
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* Published / primary role: gold text, gold border */
+.badge-published {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  opacity: 0.9;
+}
+
+/* Under review: muted gold — real but not yet confirmed */
+.badge-review {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  opacity: 0.5;
+}
+
+/* Contributor / supporting role: steel blue — distinguishes
+   contributory work from sole or primary authorship */
+.badge-contrib {
+  color: var(--color-text-muted);
+  border-color: var(--color-text-muted);
+  opacity: 0.7;
+}
+
+
+/* ================================================================
+  7. PUBLICATION LINKS
+
+  External links to papers, books, or articles. Displayed as
+  understated text links in Gill Sans, not buttons.
+================================================================ */
+
+.pub-links {
+  display: flex;
+  flex-wrap: wrap;         /* Multiple links wrap to the next line */
+  gap: 1rem;
+  margin-top: 0.6rem;
+}
+
+.pub-link {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;      /* 12px */
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--color-accent);
+  text-decoration: none;
+  /* The → arrow is included in the HTML as text, not a CSS trick,
+     so it copies correctly when someone selects the link text */
+  transition: opacity 0.2s ease;
+}
+
+.pub-link:hover {
+  opacity: 0.7;
+  text-decoration: underline;
+}
+
+
+/* ================================================================
+  8. VOLUME SUB-LIST
+
+  Used in the Churchill Document Volumes entry to list individual
+  volumes beneath a shared contribution note.
+================================================================ */
+
+.pub-volume-list {
+  /* Remove default browser bullet styling */
+  list-style: none;
+  margin-top: 0.5rem;
+}
+
+.pub-volume-list li {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;    /* 13px */
+  font-weight: 300;
+  color: var(--color-text-body);
+  line-height: 1.6;
+  /* A thin gold left border acts as a visual bullet replacement,
+     more consistent with the Scholar's Study aesthetic than
+     a round dot */
+  padding-left: 0.85rem;
+  border-left: 1px solid var(--color-accent-dim);
+  margin-bottom: 0.4rem;
+}
+
+.pub-volume-list li:last-child {
+  margin-bottom: 0;
+}
+
+
+/* ================================================================
+  9. RESPONSIVE ADJUSTMENTS
+
+  On narrow screens (phones), the two-column pub-entry grid
+  collapses to a single column. The meta information (year,
+  badge) moves above the body content.
+================================================================ */
+
+@media (max-width: 540px) {
+
+  /* Switch from two columns to one */
+  .pub-entry {
+    grid-template-columns: 1fr;
+    gap: 0.5rem 0;
+  }
+
+  /* In single-column layout, the meta row shifts to horizontal:
+     year and badge sit side by side above the body content */
+  .pub-meta {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  /* In horizontal meta layout, align to the left */
+  .pub-year {
+    text-align: left;
+  }
+
+  /* Reduce page-header top padding on small screens */
+  .page-header {
+    padding: 2.5rem 0 2rem;
+  }
+}
