@@ -1,301 +1,340 @@
 <!DOCTYPE html>
+<!--
+  JOSIAH LEINBACH — PROFESSIONAL PORTFOLIO
+  publications.html — Publications Page
+
+  ADDING A NEW PUBLICATION:
+  Each publication is a <article class="pub-entry"> block.
+  To add one, copy an existing block from the appropriate section
+  and update the text inside it. The structure of each block is:
+
+    <article class="pub-entry">
+      <div class="pub-meta">          ← year and type badge
+      <div class="pub-body">          ← title, authors, venue, links
+    </article>
+
+  See the comments inside each section for field-by-field guidance.
+-->
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Josiah Leinbach Professional Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body {
-            margin: 0;
-            font-family: "Gill Sans";
-            display: flex;
-            min-height: 100vh;
-        }
-        .sidebar {
-            width: 20%;
-            min-width: 250px;
-            background-color: #2c3e50;
-            padding: 20px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-        .sidebar .headshot {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 20px;
-        }
-        .sidebar .text-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .sidebar h1 {
-            margin: 0;
-            font-size: 24px;
-            color: #F9F5F0;
-        }
-        .sidebar h3 {
-            margin: 10px 0;
-            color: #7A7A73;
-        }
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-            margin: 20px 0;
-        }
-        .sidebar ul li {
-            margin: 10px 0;
-        }
-        .sidebar ul li a {
-            text-decoration: none;
-            color: #F9F5F0;
-            font-size: 18px;
-        }
-        .sidebar ul li a:hover {
-            text-decoration: underline;
-        }
-        .social-icons {
-            margin-top: 10px;
-        }
-        .social-icons a {
-            color: #F9F5F0;
-            font-size: 24px;
-            margin: 0 10px;
-            text-decoration: none;
-        }
-        .social-icons a:hover {
-            color: #0056b3;
-        }
-        .main-content {
-            width: 80%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 70px;
-            box-sizing: border-box;
-        }
-        .publication {
-            max-width: 600px;
-            width: 100%;
-            background-color: #f8f9fa;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-left: 4px solid #3498db;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Publications by Josiah Leinbach — statistical research, historical scholarship, and editorial work.">
+  <title>Publications — Josiah Leinbach</title>
 
-        .publication h3 {
-            max-width: 600px;
-            width: 100%;
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-      /* Mobile Styles */
-      @media screen and (max-width: 768px) {
-          body {
-              flex-direction: column;
-              height: auto;
-          }
-          
-          .sidebar {
-              width: 100%;
-              min-width: auto;
-              padding: 15px;
-              order: 1;
-          }
-          
-          .sidebar .headshot {
-              width: 120px;
-              height: 120px;
-              margin-bottom: 15px;
-          }
-          
-          .sidebar h1 {
-              font-size: 20px;
-          }
-          
-          .sidebar h3 {
-              font-size: 16px;
-              margin: 5px 0;
-          }
-          
-          .sidebar ul {
-              display: flex;
-              flex-wrap: wrap;
-              justify-content: center;
-              margin: 15px 0;
-          }
-          
-          .sidebar ul li {
-              margin: 5px 15px;
-          }
-          
-          .sidebar ul li a {
-              font-size: 16px;
-          }
-          
-          .social-icons a {
-              font-size: 20px;
-              margin: 0 8px;
-          }
-          
-          .main-content {
-              width: 100%;
-              padding: 20px;
-              order: 2;
-          }
-          
-          .box {
-              padding: 15px;
-              min-height: auto;
-          }
-          
-          .box p {
-              font-size: 14px;
-          }
-          
-          .publication {
-              font-size: 15px;
-          }
-          
-          .publication h2 {
-              font-size: 20px;
-          }
-      }
+  <!-- Google Fonts: same as index.html — must appear on every page -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
 
-      /* Small Mobile Styles */
-      @media screen and (max-width: 480px) {
-          .sidebar {
-              padding: 10px;
-          }
-          
-          .sidebar .headshot {
-              width: 100px;
-              height: 100px;
-          }
-          
-          .sidebar h1 {
-              font-size: 18px;
-          }
-          
-          .sidebar h3 {
-              font-size: 14px;
-          }
-          
-          .sidebar ul li a {
-              font-size: 14px;
-          }
-          
-          .social-icons a {
-              font-size: 18px;
-              margin: 0 6px;
-          }
-          
-          .main-content {
-              padding: 15px;
-          }
-          
-          .box {
-              padding: 12px;
-          }
-          
-          .box p {
-              font-size: 13px;
-          }
-          
-          .publication {
-              font-size: 14px;
-          }
-          
-          .publication h2 {
-              font-size: 18px;
-          }
-      }
-    </style>
+  <!-- Shared stylesheet: the same styles.css used on the home page.
+       Because both files are in the same folder, this path works. -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- publications.css: page-specific styles for the publication
+       list layout. Keeps styles.css clean and shared. -->
+  <link rel="stylesheet" href="publications.css">
 </head>
+
 <body>
-    <div class="sidebar">
-        <img src="images/headshot.jpg" alt="Josiah Leinbach's headshot" class="headshot">
-        <div class="text-content">
-            <h1>Josiah Leinbach</h1>
-            <h3>Statistician and GenAI Consultant</h3>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="publications.html">Publications</a></li>
-                <li><a href="honors.html">Honors</a></li>
-            </ul>
-            <div class="social-icons">
-                <a href="https://github.com/josiah-leinbach" target="_blank" aria-label="GitHub">
-                  <i class="fab fa-github"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/josiah-leinbach-333601206/" target="_blank" aria-label="LinkedIn">
-                  <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="https://x.com/EBurke1790" target="_blank" aria-label="Twitter">
-                  <i class="fab fa-twitter"></i>
-                </a>
-            </div>
+
+  <!-- ============================================================
+    NAVIGATION: identical across all pages.
+    Move the "active" class to the <a> that matches the current page.
+    Here it is on "Publications".
+  ============================================================ -->
+  <nav aria-label="Main navigation">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="publications.html" class="active">Publications</a></li>
+      <li><a href="writing.html">Writing</a></li>
+      <li><a href="cv.html">CV</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-wrapper">
+
+    <!-- ==========================================================
+      PAGE HEADER: the title block for this page.
+      Follows the same centered-monument pattern as the hero,
+      but scaled down — this is a section header, not the full
+      home page hero.
+    ========================================================== -->
+    <header class="page-header">
+      <p class="section-label">Scholarship</p>
+      <h1 class="page-title">Publications</h1>
+      <div class="ornamental-rule">
+        <span class="ornament">✦</span>
+      </div>
+      <!-- A brief orienting statement for the reader.
+           Edit this to reflect your current description. -->
+      <p class="page-intro">
+        Research in applied statistics, stylometry, and historical scholarship,
+        alongside editorial contributions to documentary history.
+      </p>
+    </header>
+
+    <!-- ==========================================================
+      SECTION: PEER-REVIEWED PAPERS
+      Academic journal articles and papers under review.
+
+      Publication entry structure:
+      - pub-year: the four-digit year of publication or submission
+      - pub-badge: a short label indicating status or type
+        Common values: "Published", "Under Review", "In Press"
+      - pub-title: the full title of the paper, in Cormorant italic
+      - pub-authors: author list in standard citation format
+      - pub-venue: journal name, italicized, with volume/issue if known
+      - pub-note: optional — a short clarifying note (role, status, etc.)
+      - pub-links: optional — links to PDF, DOI, or abstract
+    ========================================================== -->
+    <section class="pub-section" aria-label="Peer-reviewed papers">
+
+      <h2 class="pub-section-heading">Papers</h2>
+
+      <!-- Paper 1: Deutero-Pauline HMM paper — under review -->
+      <article class="pub-entry">
+        <div class="pub-meta">
+          <!-- Year: right-aligned in the left column -->
+          <span class="pub-year">2025</span>
+          <!-- Status badge: color is set in publications.css
+               "badge-review" = amber/gold tone
+               "badge-published" = brighter gold
+               See publications.css for the badge color options. -->
+          <span class="pub-badge badge-review">Under Review</span>
         </div>
+        <div class="pub-body">
+          <!-- Title: italicized per academic convention for paper titles.
+               For book titles, use <em> as well. -->
+          <p class="pub-title">
+            <em>A State-Restricted Hidden Markov Model for Authorship Attribution
+            of the Deutero-Pauline and Pastoral Epistles</em>
+          </p>
+          <!-- Authors: your name in <strong> so it stands out -->
+          <p class="pub-authors">
+            <strong>Leinbach, J.</strong>, Sarkar, S., &amp; Zhu, X.
+          </p>
+          <!-- Venue: journal name italicized -->
+          <p class="pub-venue">
+            <em>Journal of the Royal Statistical Society, Series C</em>
+          </p>
+          <!-- Note: additional context — status, award, etc. -->
+          <p class="pub-note">Submitted for peer review.</p>
+        </div>
+      </article>
+
+      <!-- Paper 2: LLM survey prompts paper — contributory role -->
+      <article class="pub-entry">
+        <div class="pub-meta">
+          <span class="pub-year">2025</span>
+          <!-- "badge-contrib" indicates a contributory rather than
+               primary-author role — styled differently in CSS -->
+          <span class="pub-badge badge-contrib">Contributor</span>
+        </div>
+        <div class="pub-body">
+          <p class="pub-title">
+            <em>The Task Is to Improve the Ask: An Experiment for Developing
+            Prompts to Generate High Quality Survey Items from Large Language Models</em>
+          </p>
+          <p class="pub-authors">
+            Buskirk, T., Eck, A., &amp; Timbrook, J.
+          </p>
+          <p class="pub-venue">
+            SSRN Working Paper (July 2025)
+          </p>
+          <!-- Contribution note: explains your role honestly -->
+          <p class="pub-note">Data collection and curation assistance.</p>
+          <!-- Links: external link to the paper -->
+          <div class="pub-links">
+            <a href="https://ssrn.com/abstract=5377878" target="_blank" rel="noopener" class="pub-link">
+              View on SSRN →
+            </a>
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- ==========================================================
+      SECTION: THESES
+      Graduate and undergraduate theses. Listed with institution,
+      year, and advisor.
+    ========================================================== -->
+    <section class="pub-section" aria-label="Theses">
+
+      <h2 class="pub-section-heading">Theses</h2>
+
+      <!-- Thesis 1: Statistics M.S. thesis -->
+      <article class="pub-entry">
+        <div class="pub-meta">
+          <span class="pub-year">2024</span>
+          <span class="pub-badge badge-published">M.S. Thesis</span>
+        </div>
+        <div class="pub-body">
+          <p class="pub-title">
+            <em>A Hidden Markov Approach to Authorship Attribution
+            of the Pastoral Epistles</em>
+          </p>
+          <!-- Institution in place of authors for a thesis -->
+          <p class="pub-authors">Bowling Green State University</p>
+          <!-- Advisor listed in the venue field -->
+          <p class="pub-venue">Advisor: Shuchismita Sarkar</p>
+        </div>
+      </article>
+
+      <!-- Thesis 2: History B.A. thesis -->
+      <article class="pub-entry">
+        <div class="pub-meta">
+          <span class="pub-year">2020</span>
+          <span class="pub-badge badge-published">B.A. Thesis</span>
+        </div>
+        <div class="pub-body">
+          <p class="pub-title">
+            <em>Potential Patriots: Why the British West Indies
+            Did Not Join the American Revolution</em>
+          </p>
+          <p class="pub-authors">Hillsdale College</p>
+          <p class="pub-venue">Advisor: David Stewart</p>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- ==========================================================
+      SECTION: ARTICLES
+      Shorter published pieces — journal articles, essays, reviews.
+    ========================================================== -->
+    <section class="pub-section" aria-label="Articles">
+
+      <h2 class="pub-section-heading">Articles</h2>
+
+      <article class="pub-entry">
+        <div class="pub-meta">
+          <span class="pub-year">2020</span>
+          <span class="pub-badge badge-published">Published</span>
+        </div>
+        <div class="pub-body">
+          <p class="pub-title">
+            <em>History as Prologue: Winston Churchill and the
+            Historian as Statesman</em>
+          </p>
+          <p class="pub-authors"><strong>Leinbach, J.</strong></p>
+          <p class="pub-venue">
+            <em>The Churchill Project</em>, Hillsdale College
+          </p>
+          <div class="pub-links">
+            <a href="https://winstonchurchill.hillsdale.edu/history-statesmanship/"
+               target="_blank" rel="noopener" class="pub-link">
+              Read article →
+            </a>
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- ==========================================================
+      SECTION: BOOKS
+      Edited volumes and books with contributory roles.
+
+      Note on the Churchill volumes: these are listed under a
+      shared heading with a clear contribution note, so the
+      nature of the work (research assistance) is transparent
+      while still crediting the substantial contribution.
+    ========================================================== -->
+    <section class="pub-section" aria-label="Books">
+
+      <h2 class="pub-section-heading">Books</h2>
+
+      <!-- Book 1: Whitaker Disputation — sole editor -->
+      <article class="pub-entry">
+        <div class="pub-meta">
+          <span class="pub-year">2025</span>
+          <span class="pub-badge badge-published">Editor</span>
+        </div>
+        <div class="pub-body">
+          <p class="pub-title">
+            <em>A Disputation On Holy Scripture</em>
+          </p>
+          <!-- For a book, the original author goes in pub-authors
+               and the editorial role is noted separately -->
+          <p class="pub-authors">
+            Whitaker, William. Edited by <strong>Josiah Leinbach</strong>.
+          </p>
+          <p class="pub-venue">
+            2 vols. South Bend: Prolego Press.
+          </p>
+          <div class="pub-links">
+            <a href="https://www.amazon.com/Disputation-Holy-Scripture-1/dp/1735923079/"
+               target="_blank" rel="noopener" class="pub-link">
+              Volume 1 →
+            </a>
+            <a href="https://www.amazon.com/Disputation-Holy-Scripture-2/dp/1735923095/"
+               target="_blank" rel="noopener" class="pub-link">
+              Volume 2 →
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Churchill Document Volumes: grouped under one entry with
+           individual volumes listed inside, since the contribution
+           role (research assistance) is the same across all three.
+           This avoids repetition while keeping the record complete. -->
+      <article class="pub-entry">
+        <div class="pub-meta">
+          <!-- Spanning dates for a multi-year contribution -->
+          <span class="pub-year">2018–22</span>
+          <span class="pub-badge badge-contrib">Contributor</span>
+        </div>
+        <div class="pub-body">
+          <p class="pub-title">
+            <em>The Churchill Document Volumes</em>
+          </p>
+          <p class="pub-authors">
+            Gilbert, Sir Martin, &amp; Arnn, Larry P. (Eds.)
+          </p>
+          <p class="pub-venue">Hillsdale College Press.</p>
+          <p class="pub-note">Research and editorial assistance on three volumes:</p>
+          <!-- Sub-list of individual volumes within this entry -->
+          <ul class="pub-volume-list">
+            <li>
+              Vol. 23 — <em>Never Flinch, Never Weary,
+              November 1951 to February 1965</em> (2022)
+            </li>
+            <li>
+              Vol. 22 — <em>Leader of the Opposition,
+              August 1945 to October 1951</em> (2019)
+            </li>
+            <li>
+              Vol. 21 — <em>The Shadows of Victory,
+              January–August 1945</em> (2018)
+            </li>
+          </ul>
+        </div>
+      </article>
+
+    </section>
+
+  </div><!-- end .page-wrapper -->
+
+  <!-- ============================================================
+    FOOTER: identical across all pages.
+    Update your email or external links here if they change.
+  ============================================================ -->
+  <footer>
+    <div class="footer-inner">
+      <p class="footer-name">Josiah Leinbach</p>
+      <p class="footer-tagline">Statistician&ensp;·&ensp;Systems Thinker&ensp;·&ensp;Renaissance Man</p>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="mailto:josiahleinbach@gmail.com">josiahleinbach@gmail.com</a>
+        <a href="https://josiahleinbach.substack.com" target="_blank" rel="noopener">Substack</a>
+        <a href="https://github.com/josiah-leinbach" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-copy">&copy; 2025 Josiah Leinbach. All rights reserved.</p>
     </div>
-    <div class="main-content">
-        <div class="publication">
-          <h3>Theses</h3>
-            <p>
-                <i>A Hidden Markov Approach to Authorship Attribution of the Pastoral Epistles</i>. Bowling Green State Univeristy (2024). 
-                Advisor: Shuchismita Sarkar
-            </p>
-            <p>
-                <i>Potential Patriots: Why the British West Indies Did Not Join the American Revolution</i>. Hillsdale College (2020).
-                Advisor: David Stewart
-            </p>
-            <h3>Papers</h3>
-            <p>
-                Leinbach, J., Sarkar, S., Zhu, X. (2025). A State-Restricted Hidden Markov Model for Authorship
-                Attribution of the Deutero-Pauline and Pastoral Epistles. Under review for <i>The Journal of the Royal
-                Statistical Society, Series C</i>.
-            <p>
-            <p>
-                Buskirk, Trent and Eck, Adam and Timbrook, Jerry.<a href="https://ssrn.com/abstract=5377878" title = "The Task Is to 
-                Improve the Ask: An Experiment for Developing Prompts to Generate High Quality Survey Items from Large 
-                Language Models (July 15, 2025)" target="_blank" rel="noopener noreferrer">The Task Is to 
-                Improve the Ask: An Experiment for Developing Prompts to Generate High Quality Survey Items from Large 
-                Language Models (July 15, 2025)<a/>. (Data collection and curation assistance.)
-            </p>
-            <h3>Articles</h3>
-            <p>
-                <a href="https://winstonchurchill.hillsdale.edu/history-statesmanship/" title="History as Prologue" target="_blank" rel="noopener noreferrer">History as Prologue: Winston Churchill and the Historian as Statesman</a>.
-                <i>The Churchill Project</i>, Hillsdale College (17 September 2020).
-            <p>
-        </div>
-        <div class="publication">
-            <h3>Books</h3>
-            <p>
-                Whitaker, William. <i>A Disputation On Holy Scripture</i>. <a href="https://www.amazon.com/Disputation-Holy-Scripture-1/dp/1735923079/ref=sr_1_2" title="Volume 1" target="_blank" rel="noopener noreferrer">Volume 1</a> 
-                and <a href="https://www.amazon.com/Disputation-Holy-Scripture-2/dp/1735923095/ref=sr_1_3" title="Volume 2" target="_blank" rel="noopener noreferrer">Volume 2.</a> Edited by Josiah Leinbach. South Bend: Prolego
-                Press, 2025.
-            </p>
-            <p>
-                <i>The Churchill Document Volumes</i>. Vol. 23, <i>Never Flinch, Never Weary, November 1951 to February 1965</i>. 
-                Edited by Sir Martin Gilbert and Larry P. Arnn. Hillsdale: Hillsdale College Press, 2022.
-                Research and editorial assistance.
-            </p>
-            <p>
-                <i>The Churchill Document Volumes</i>. Vol. 22, <i>Leader of the Opposition, August 1945 to October 1951</i>.
-                Edited by Sir Martin Gilbert and Larry P. Arnn. Hillsdale: Hillsdale College Press, 2019. 
-                Research and editorial assistance.
-            </p>
-            <p>
-                <i>The Churchill Document Volumes</i>. Vol. 21, <i>The Shadows of Victory, January-August 1945</i>. Edited by
-                Sir Martin Gilbert and Larry P. Arnn. Hillsdale: Hillsdale College Press, 2018. 
-                Research and editorial assistance.
-            </p>
-        </div>
-    </div>
+  </footer>
+
 </body>
 </html>
