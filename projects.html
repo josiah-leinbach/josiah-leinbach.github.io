@@ -1,271 +1,177 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Josiah Leinbach Professional Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body {
-            margin: 0;
-            font-family: "Gill Sans";
-            display: flex;
-            min-height: 100vh;
-        }
-        .sidebar {
-            width: 20%;
-            min-width: 250px;
-            background-color: #2c3e50;
-            padding: 20px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-        .sidebar .headshot {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 20px;
-        }
-        .sidebar .text-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .sidebar h1 {
-            margin: 0;
-            font-size: 24px;
-            color: #F9F5F0;
-        }
-        .sidebar h3 {
-            margin: 10px 0;
-            color: #7A7A73;
-        }
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-            margin: 20px 0;
-        }
-        .sidebar ul li {
-            margin: 10px 0;
-        }
-        .sidebar ul li a {
-            text-decoration: none;
-            color: #F9F5F0;
-            font-size: 18px;
-        }
-        .sidebar ul li a:hover {
-            text-decoration: underline;
-        }
-        .social-icons {
-            margin-top: 10px;
-        }
-        .social-icons a {
-            color: #F9F5F0;
-            font-size: 24px;
-            margin: 0 10px;
-            text-decoration: none;
-        }
-        .social-icons a:hover {
-            color: #0056b3;
-        }
-        .main-content {
-            width: 80%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 70px;
-            box-sizing: border-box;
-        }
-        .projects {
-            max-width: 600px;
-            width: 100%;
-            text-align: left;
-            font-size: 16px;
-            line-height: 1.6;
-        }
-        /* Mobile Styles */
-    @media screen and (max-width: 768px) {
-        body {
-            flex-direction: column;
-            height: auto;
-        }
-        
-        .sidebar {
-            width: 100%;
-            min-width: auto;
-            padding: 15px;
-            order: 1;
-        }
-        
-        .sidebar .headshot {
-            width: 120px;
-            height: 120px;
-            margin-bottom: 15px;
-        }
-        
-        .sidebar h1 {
-            font-size: 20px;
-        }
-        
-        .sidebar h3 {
-            font-size: 16px;
-            margin: 5px 0;
-        }
-        
-        .sidebar ul {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin: 15px 0;
-        }
-        
-        .sidebar ul li {
-            margin: 5px 15px;
-        }
-        
-        .sidebar ul li a {
-            font-size: 16px;
-        }
-        
-        .social-icons a {
-            font-size: 20px;
-            margin: 0 8px;
-        }
-        
-        .main-content {
-            width: 100%;
-            padding: 20px;
-            order: 2;
-        }
-        
-        
-        .box p {
-            font-size: 14px;
-        }
-        
-        .projects {
-            font-size: 15px;
-        }
-        
-        .projects h2 {
-            font-size: 20px;
-        }
-    }
+<!--
+  JOSIAH LEINBACH — PROFESSIONAL PORTFOLIO
+  projects.html — Projects Page
 
-    /* Small Mobile Styles */
-    @media screen and (max-width: 480px) {
-        .sidebar {
-            padding: 10px;
-        }
-        
-        .sidebar .headshot {
-            width: 100px;
-            height: 100px;
-        }
-        
-        .sidebar h1 {
-            font-size: 18px;
-        }
-        
-        .sidebar h3 {
-            font-size: 14px;
-        }
-        
-        .sidebar ul li a {
-            font-size: 14px;
-        }
-        
-        .social-icons a {
-            font-size: 18px;
-            margin: 0 6px;
-        }
-        
-        .main-content {
-            padding: 15px;
-        }
-        
-        .box {
-            padding: 12px;
-        }
-        
-        .box p {
-            font-size: 13px;
-        }
-        
-        .projects {
-            font-size: 14px;
-        }
-        
-        .projects h2 {
-            font-size: 18px;
-        }
-    }
-    </style>
+  ADDING A NEW PROJECT:
+  Each project is an <article class="project-card"> block inside
+  the <div class="projects-grid"> container. To add a project,
+  copy the entire block from one opening <article class="project-card">
+  tag to its closing </article> tag, paste it after the last
+  existing project, and update every field.
+
+  THE FIELDS IN EACH PROJECT CARD:
+  - .project-tag      — discipline label (e.g. "Statistical Research")
+  - .project-title    — the project name in Cormorant
+  - .project-desc     — one to three sentences describing the project,
+                        its objectives, and its outputs
+  - .project-meta     — optional status line (e.g. "Ongoing · Est. 2021")
+  - .project-link     — external or internal link; update both the
+                        href="..." and the link text
+
+  REMOVING THE PLACEHOLDER TEXT:
+  Find the comment marked "PLACEHOLDER" inside .project-desc and
+  replace the <span class="project-placeholder"> element with your
+  own descriptive sentences.
+-->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Projects by Josiah Leinbach — research, data, and scholarly work.">
+  <title>Projects — Josiah Leinbach</title>
+
+  <!-- Google Fonts: same as every other page -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+
+  <!-- Shared design system -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Projects-specific styles -->
+  <link rel="stylesheet" href="projects.css">
 </head>
+
 <body>
-    <div class="sidebar">
-        <img src="images/headshot.jpg" alt="Josiah Leinbach's headshot" class="headshot">
-        <div class="text-content">
-            <h1>Josiah Leinbach</h1>
-            <h3>Statistician and GenAI Consultant</h3>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="publications.html">Publications</a></li>
-                <li><a href="honors.html">Honors</a></li>
-            </ul>
-            <div class="social-icons">
-                <a href="https://github.com/josiah-leinbach" target="_blank" aria-label="GitHub">
-                  <i class="fab fa-github"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/josiah-leinbach-333601206/" target="_blank" aria-label="LinkedIn">
-                  <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="https://x.com/EBurke1790" target="_blank" aria-label="Twitter">
-                  <i class="fab fa-twitter"></i>
-                </a>
-            </div>
+
+  <!-- ============================================================
+    NAVIGATION: "Projects" is the active link on this page.
+  ============================================================ -->
+  <nav aria-label="Main navigation">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html" class="active">Projects</a></li>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="writing.html">Writing</a></li>
+      <li><a href="cv.html">CV</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-wrapper">
+
+    <!-- ==========================================================
+      PAGE HEADER
+      Same centered-monument pattern as Publications and CV.
+    ========================================================== -->
+    <header class="page-header">
+      <p class="section-label">Work</p>
+      <h1 class="page-title">Projects</h1>
+      <div class="ornamental-rule">
+        <span class="ornament">✦</span>
+      </div>
+      <p class="page-intro">
+        Selected research, data, and scholarly projects.
+      </p>
+    </header>
+
+    <!-- ==========================================================
+      PROJECTS GRID
+      All project cards live inside this container. The grid is
+      defined in projects.css — currently set to a single column,
+      which suits one project. When you add a second project, the
+      grid will automatically reflow to two columns on wide screens.
+
+      TO ADD A PROJECT: copy the entire <article class="project-card">
+      block below and paste it here as a sibling, then fill in the
+      fields. Nothing else needs to change.
+    ========================================================== -->
+    <div class="projects-grid">
+
+      <!-- ========================================================
+        PROJECT: Traditional BCP Parishes
+        
+        TO COMPLETE THIS CARD:
+        Replace the <span class="project-placeholder"> element
+        inside .project-desc with your own descriptive sentences.
+        Aim for two to three sentences covering:
+          1. What the project is
+          2. Why it exists / what problem it solves
+          3. Its current scope or outputs (number of parishes,
+             geographic coverage, how it is maintained, etc.)
+      ======================================================== -->
+      <article class="project-card">
+
+        <!-- Discipline tag: Gill Sans small caps in gold.
+             Update this to reflect the primary domain of the project.
+             Examples: "Statistical Research", "Data Infrastructure",
+             "Historical Scholarship", "Mapping & Geospatial" -->
+        <p class="project-tag">Anglican Studies &amp; Mapping</p>
+
+        <!-- Project title: large Cormorant, vellum color -->
+        <h2 class="project-title">Traditional BCP Parishes</h2>
+
+        <!-- Project description: replace the placeholder span with
+             your own prose. Plain <p> tags work fine — no special
+             classes needed inside .project-desc. -->
+        <div class="project-desc">
+
+          <!-- PLACEHOLDER: replace this entire <span> with your
+               descriptive sentences when ready. The placeholder
+               is styled in a dimmer color so it is visually obvious
+               that it needs to be replaced. -->
+          <span class="project-placeholder">
+            [Description to be added. Replace this placeholder with
+            two to three sentences describing the project's objectives,
+            methodology, and outputs.]
+          </span>
+
         </div>
+
+        <!-- Project meta: a short status or date line.
+             Common formats:
+               "Ongoing · Est. 2021"
+               "Completed · 2023"
+               "In progress · Updated monthly"
+             Remove this element entirely if no status note is needed. -->
+        <p class="project-meta">Ongoing</p>
+
+        <!-- Project link: update href and link text as needed.
+             Use target="_blank" rel="noopener" for external links.
+             For internal links (other pages on this site), omit both. -->
+        <a href="traditional_bcp_parishes/parishes_map_form.html"
+           class="project-link">
+          View map &amp; parish registry &rarr;
+        </a>
+
+      </article>
+      <!-- end project-card: Traditional BCP Parishes -->
+
+      <!-- ========================================================
+        TO ADD YOUR NEXT PROJECT, PASTE A NEW CARD HERE.
+        Copy the entire <article class="project-card"> block above,
+        from <article> to </article>, and fill in the fields.
+      ======================================================== -->
+
+    </div><!-- end .projects-grid -->
+
+  </div><!-- end .page-wrapper -->
+
+  <!-- ============================================================
+    FOOTER: identical across all pages.
+  ============================================================ -->
+  <footer>
+    <div class="footer-inner">
+      <p class="footer-name">Josiah Leinbach</p>
+      <p class="footer-tagline">Statistician&ensp;·&ensp;Systems Thinker&ensp;·&ensp;Renaissance Man</p>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="mailto:josiahleinbach@gmail.com">josiahleinbach@gmail.com</a>
+        <a href="https://josiahleinbach.substack.com" target="_blank" rel="noopener">Substack</a>
+        <a href="https://github.com/josiah-leinbach" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-copy">&copy; 2025 Josiah Leinbach. All rights reserved.</p>
     </div>
-    <div class="main-content">
-        <div class="projects">
-        <h2>Projects</h2>
-        <h3>Microeconomic Applications of LLMs' Macroeconomic Landscape</h3>
-          <p>
-            Integrate cognitive science, developmental psychology, and social epistemology to find beneficial use-cases for LLMs.
-            Determine best practices for using LLMs in education, research, and office tasks.
-            Establish ethical principles for students, teachers, and corporate managers in using LLMs.
-          </p>
-        <h3>Feasibility of private, inter-city bus transit in northwest Ohio</h3>
-          <p>
-           Devising an economic feasibility study for a proposed (i.e. theoretical) private, inter-city bus transit company that would service cities and towns around Toledo, OH.
-          </p>
-        <h3>Stylometric analysis of the Greek New Testament</h3>
-          <p>
-            Designing various stylostatistical models for the Greek New Testament (GNT), based on New Testament scholarship, that explore the relationship between writing style 
-            and subject matter, genre, and rhetorical register.
-          </p>
-        <h3>Bletchleyism</h3>
-          <p>
-            Few topics draw together so wonderfully my love of history, statistical methods, and interdisciplinary approaches to problem-solving as does the story of
-            <a href="https://en.wikipedia.org/wiki/Bletchley_Park" title="Bletchley Park" target="_blank" rel="noopener noreferrer">Bletchley Park</a> and the breaking of 
-            German ciphers in WWII. As such, I occasionally publish my thoughts on sundry subjects, from 16th century monarchism to social applications of Game Theory, 
-            at <a href="https://josiahleinbach.substack.com" title="Bletchlyism" target="_blank" rel="noopener noreferrer">Bletchleyism</a>.
-          </p>
-        <h3>Traditional BCP Parishes</h3>
-          <p>
-            I keep a running list of all traditional Book of Common Prayer (BCP) parishes in the Anglican Church in North America (ACNA), the Anglican Church of Australia (ACA),
-            and the Church of England. 
-          </p>
-          <p>
-            Links for the parish maps and crowd-sourced entry forms can be found <a href="traditional_bcp_parishes/parishes_map_form.html">here</a>. Users may submit additional parishes that are not listed
-            on the map.
-          </p>
-        </div>
-    </div>
+  </footer>
+
 </body>
 </html>
