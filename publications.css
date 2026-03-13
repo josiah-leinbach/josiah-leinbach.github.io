@@ -87,9 +87,10 @@
    on the home page, but larger since it's a navigational heading. */
 .pub-section-heading {
   font-family: var(--font-sans);
-  font-size: 0.6875rem;    /* 11px */
+  font-size: 1rem;    /* 16px */
+  font-weight: 400;
   font-variant: small-caps;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.08em;
   text-transform: lowercase;
   color: var(--color-accent);
   margin-bottom: 2rem;
@@ -195,8 +196,7 @@
 }
 
 /* Authors: Gill Sans, slightly smaller, body color.
-   Your name is wrapped in <strong> in the HTML — the bold
-   weight naturally makes it stand out in the author list. */
+   Your name is printed in small caps. */
 .pub-authors {
   font-family: var(--font-sans);
   font-size: 0.8125rem;    /* 13px */
@@ -205,10 +205,11 @@
   margin-bottom: 0.2rem;
 }
 
-/* Your name within an author list: slightly brighter than
-   surrounding author names */
+/* Your name within an author list in small caps. */
 .pub-authors strong {
-  font-weight: 600;
+  font-weight: 400;
+  font-variant: small-caps;
+  letter-spacing: 0.08em;           /* Small caps read better with slightly open tracking */
   color: var(--color-text-primary);
 }
 
