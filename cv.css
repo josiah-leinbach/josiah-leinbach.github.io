@@ -222,7 +222,7 @@
   font-family: var(--font-sans);
   font-style: normal;
   font-size: 0.75rem;
-  color: var(--color-text-muted);
+  color: var(--color-text-primary);
   font-weight: 300;
 }
 
