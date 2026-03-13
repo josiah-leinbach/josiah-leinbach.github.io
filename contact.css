@@ -1,0 +1,212 @@
+/*
+  JOSIAH LEINBACH — PROFESSIONAL PORTFOLIO
+  contact.css — Contact Page Styles
+
+  Loaded after styles.css, which supplies shared design tokens,
+  nav, footer, page-wrapper, ornamental-rule, and section-label.
+  This file handles only the contact-specific layout.
+
+  ORGANIZATION:
+  1. Contact Monument (centered wrapper)
+  2. Contact Heading
+  3. Contact Statement & Email Span
+  4. Narrow Ornamental Rule Variant
+  5. Profile Links
+  6. Responsive Adjustments
+*/
+
+
+/* ================================================================
+  1. CONTACT MONUMENT
+
+  A centered column that holds all page content. Narrower than
+  the full --max-width of the page-wrapper, which forces tighter
+  line lengths on the statement text — better for a short
+  prose passage than a full-width column would be.
+
+  The top padding positions the content well below the nav bar;
+  the bottom padding ensures the footer doesn't crowd the profiles.
+================================================================ */
+
+.contact-monument {
+  text-align: center;
+  max-width: 30rem;       /* ~480px — constrains the statement to
+                             an elegant, readable measure.
+                             The page-wrapper's max-width of 740px
+                             still applies as an outer limit. */
+  margin: 0 auto;         /* Centers the monument within the wrapper */
+  padding: 5rem 0 4rem;
+}
+
+
+/* ================================================================
+  2. CONTACT HEADING
+
+  Large Cormorant heading — same visual treatment as page titles
+  on the CV and publications pages. The .section-label above it
+  and the ornamental-rule below it are defined in styles.css.
+================================================================ */
+
+.contact-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(2.25rem, 6vw, 3.25rem); /* Responsive: scales
+     between 36px (small screens) and 52px (large screens) */
+  font-weight: 600;
+  color: var(--color-text-primary);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+
+/* ================================================================
+  3. CONTACT STATEMENT & EMAIL SPAN
+
+  The approved contact text. Set in Cormorant italic — the same
+  register as the epigraph on the home page — to give it a
+  considered, personal quality rather than a boilerplate feel.
+
+  The email address is a <span class="contact-email"> within the
+  paragraph. It is plain text (not a link) to deter scrapers, but
+  styled distinctly so it reads as the primary actionable element
+  on the page.
+================================================================ */
+
+.contact-statement {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.125rem;    /* 18px — slightly larger than body,
+                             matching the epigraph size on index.html */
+  color: var(--color-text-body);
+  line-height: 1.85;
+  margin-bottom: 2rem;
+}
+
+/* Email address: rendered in Cormorant non-italic so it stands
+   out from the surrounding italic text without needing color or
+   underlining. The gold color makes it immediately identifiable
+   as the key piece of information on the page. */
+.contact-email {
+  font-style: normal;          /* Override the italic from .contact-statement */
+  font-weight: 400;
+  color: var(--color-accent);  /* Antique gold — same as all accent elements */
+  letter-spacing: 0.02em;      /* Very slight tracking aids legibility
+                                   for an email address read character by character */
+}
+
+
+/* ================================================================
+  4. NARROW ORNAMENTAL RULE VARIANT
+
+  The second ornamental rule (between the statement and the
+  profiles) is narrower than the one below the heading. A
+  narrower rule creates visual hierarchy — the heading rule
+  spans generously, the profiles rule is more intimate.
+
+  This class is added alongside .ornamental-rule in the HTML:
+    <div class="ornamental-rule ornamental-rule--narrow">
+  The base .ornamental-rule styles from styles.css still apply;
+  this modifier only overrides the max-width.
+================================================================ */
+
+.ornamental-rule--narrow {
+  max-width: 12rem;       /* Approximately half the heading rule width */
+  margin-bottom: 2rem;    /* Space between rule and profile links below */
+}
+
+
+/* ================================================================
+  5. PROFILE LINKS
+
+  Three external profiles displayed as a horizontal row of
+  labeled link blocks. Each block shows the platform name
+  in Gill Sans small caps (gold) and the handle beneath it
+  in lighter Gill Sans.
+
+  On narrow screens these stack vertically (see responsive section).
+================================================================ */
+
+.contact-profiles {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;        /* Wraps gracefully if all three don't fit */
+}
+
+/* Each profile link block */
+.profile-link {
+  display: flex;
+  flex-direction: column;  /* Stack platform name above handle */
+  align-items: center;
+  gap: 0.3rem;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+
+  /* A subtle left/right border frames each block as a discrete
+     unit without using a card background that would feel heavy
+     on a minimal page */
+  padding: 0.75rem 1.25rem;
+  border: 1px solid var(--color-accent-dim);
+}
+
+.profile-link:hover {
+  opacity: 0.7;
+  border-color: var(--color-accent);
+  text-decoration: none;
+}
+
+/* Platform name: Gill Sans small caps, gold —
+   same treatment as .section-label but slightly larger */
+.profile-platform {
+  font-family: var(--font-sans);
+  font-size: 0.625rem;    /* 10px */
+  font-variant: small-caps;
+  letter-spacing: 0.2em;
+  text-transform: lowercase;
+  color: var(--color-accent);
+}
+
+/* Handle: Gill Sans light, muted — the actual username.
+   Smaller and dimmer than the platform name so the platform
+   label reads first. */
+.profile-handle {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;     /* 12px */
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+}
+
+
+/* ================================================================
+  6. RESPONSIVE ADJUSTMENTS
+
+  The contact page is already simple and mostly centered, so
+  very few adjustments are needed on small screens.
+================================================================ */
+
+@media (max-width: 480px) {
+
+  /* Tighten top padding on small screens */
+  .contact-monument {
+    padding: 3rem 0 3rem;
+  }
+
+  /* Slightly reduce statement font size on very narrow screens
+     to prevent awkward single-word orphan lines */
+  .contact-statement {
+    font-size: 1rem;
+  }
+
+  /* Stack profiles vertically on small screens and reduce gap */
+  .contact-profiles {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  /* Make each profile block wider when stacked */
+  .profile-link {
+    width: 12rem;
+  }
+
+}
