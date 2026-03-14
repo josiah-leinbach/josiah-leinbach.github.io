@@ -1,357 +1,776 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Traditional BCP Parishes Map (Anglican Church of Australia)</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Traditional BCP Parishes — Anglican Church of Australia</title>
 
-        body {
-            font-family: 'Garamond', serif;
-            background-image: url('https://upload.wikimedia.org/wikipedia/commons/3/31/Drawing%2C_View_of_Durham_Cathedral%2C_1883_%28CH_18610789%29.jpg');
-            background-size: cover;
-            background-position-x: 90%;
-            background-position-y: 40%;
-            min-height: 40vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding-top: 45px;
-            padding-bottom: 45px;
-        }
+  <!--
+  ═══════════════════════════════════════════════════════════════════════
+  FONT IMPORT
+  Cormorant Garamond, matching the hub, ACNA, and CofE pages.
+  - weight 400 = regular (body text, labels, descriptive prose)
+  - weight 600 = semibold (headings)
+  - ital   = italic variant (rubric, intro text, form labels)
+  ═══════════════════════════════════════════════════════════════════════
+  -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap"
+    rel="stylesheet"
+  >
 
-        .form-container {
-            background: rgba(255, 255, 255, 0.70);
-            backdrop-filter: blur(20px);
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 550px;
-            transform: translateY(0);
-            transition: all 0.3s ease;
-        }
-        
-        .map-responsive{
-          overflow:hidden;
-          padding-bottom:56.25%;
-          position:relative;
-          height:0;
-        }
- 
-        .map-responsive iframe{
-          left:0;
-          top:0;
-          height:100%;
-          width:100%;
-          position:absolute;
-        }
+  <style>
 
-        .form-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-        }
+    /* ═══════════════════════════════════════════════════════════════════
+       CSS VARIABLES
+       Identical across all four pages (hub, ACNA, CofE, ACA).
+       Change a value here and it updates the entire page at once.
+       ═══════════════════════════════════════════════════════════════════ */
+    :root {
+      --navy:          #0f1a2e;   /* page background */
+      --gold:          #d4b870;   /* primary headings */
+      --gold-mid:      #c4922a;   /* rules and borders */
+      --gold-dim:      #8b6914;   /* subdued labels, thin rules */
+      --gold-ghost:    #6b5a38;   /* running head, back-link */
+      --rubric:        #b5651d;   /* burnt orange — BCP "red" */
+      --cream-body:    #b8a882;   /* descriptive prose */
+      --cream-dim:     #8b7a58;   /* secondary labels */
+      --parchment:     #f5f0e4;   /* form input backgrounds */
+      --parchment-mid: #e8dfc8;   /* form input borders at rest */
+      --ink:           #2c2416;   /* form input text */
+      --font:          'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    }
 
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 2.2em;
-            font-weight: 300;
-            letter-spacing: -1px;
-        }
+    /* ═══════════════════════════════════════════════════════════════════
+       RESET & BASE
+       ═══════════════════════════════════════════════════════════════════ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        .form-group {
-            margin-bottom: 12px;
-            position: relative;
-        }
+    body {
+      background-color: var(--navy);
+      font-family: var(--font);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 48px 24px 64px;
+      /* Faint diagonal texture — matches all other pages in the suite */
+      background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255, 220, 120, 0.015) 0px,
+        rgba(255, 220, 120, 0.015) 1px,
+        transparent 1px,
+        transparent 12px
+      );
+    }
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #555;
-            font-weight: 500;
-            font-size: 0.95em;
-            transition: color 0.3s ease;
-        }
+    /* ═══════════════════════════════════════════════════════════════════
+       THE LEAF
+       720px — matches the ACNA and CofE pages.
+       ═══════════════════════════════════════════════════════════════════ */
+    .leaf {
+      width: 100%;
+      max-width: 720px;
+      text-align: center;
+      animation: fadein 1.1s ease both;
+    }
 
-        input, textarea, select {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #e1e5e9;
-            border-radius: 12px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            background: #fafbfc;
-            outline: none;
-        }
+    @keyframes fadein {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0);   }
+    }
 
-        input:focus, textarea:focus, select:focus {
-            border-color: #667eea;
-            background: white;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-            transform: translateY(-2px);
-        }
+    /* ═══════════════════════════════════════════════════════════════════
+       BACK LINK
+       Returns the visitor to the hub (the province directory).
+       Update href if the hub page is ever renamed or moved.
+       ═══════════════════════════════════════════════════════════════════ */
+    .back-link {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold-ghost);
+      text-decoration: none;
+      margin-bottom: 28px;
+      transition: color 0.2s ease;
+    }
 
-        input:focus + label, textarea:focus + label, select:focus + label {
-            color: #667eea;
-        }
+    .back-link:hover {
+      color: var(--gold-dim);
+    }
 
-        textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
+    .back-link::before {
+      content: '← ';
+      letter-spacing: 0.04em;
+    }
 
-        .submit-btn {
-            width: 100%;
-            background: linear-gradient(135deg, #af9674 0%, #6b8588 100%);
-            color: white;
-            padding: 18px;
-            border: none;
-            border-radius: 12px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
-        }
+    /* ═══════════════════════════════════════════════════════════════════
+       RUNNING HEAD
+       ═══════════════════════════════════════════════════════════════════ */
+    .running-head {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-ghost);
+      font-weight: 400;
+      margin-bottom: 18px;
+    }
 
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-        }
+    /* ═══════════════════════════════════════════════════════════════════
+       MAIN TITLE
+       ═══════════════════════════════════════════════════════════════════ */
+    .main-title {
+      font-size: 30px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
 
-        .submit-btn:active {
-            transform: translateY(0);
-        }
+    /* ═══════════════════════════════════════════════════════════════════
+       THICK-THIN RULE PAIR
+       The primary section divider, matching all other pages.
+       ═══════════════════════════════════════════════════════════════════ */
+    .rule-pair {
+      margin: 14px 0;
+    }
 
-        .submit-btn:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-        }
+    .rule-pair hr {
+      border: none;
+      margin: 0;
+    }
 
-        .status-message {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            font-weight: 500;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
+    .rule-thick {
+      border-top: 1.8px solid var(--gold-mid);
+    }
 
-        .status-message.show {
-            opacity: 1;
-        }
+    .rule-thin {
+      border-top: 0.5px solid var(--gold-mid);
+      margin-top: 3px !important;
+      opacity: 0.65;
+    }
 
-        .status-message.success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
+    /* Reversed pair (thin then thick) — used as section closers */
+    .rule-pair-close {
+      margin: 14px 0;
+    }
 
-        .status-message.error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
+    .rule-pair-close hr {
+      border: none;
+      margin: 0;
+    }
 
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-            margin-right: 10px;
-        }
+    /* ═══════════════════════════════════════════════════════════════════
+       RUBRIC LINE
+       Province identification in burnt-orange italic.
+       ═══════════════════════════════════════════════════════════════════ */
+    .rubric {
+      font-size: 13px;
+      font-style: italic;
+      color: var(--rubric);
+      letter-spacing: 0.03em;
+      margin-bottom: 20px;
+    }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+    /* ═══════════════════════════════════════════════════════════════════
+       MAP SECTION
+       Responsive embed: padding-bottom sets height as a ratio of width.
+       62% gives a slightly taller-than-widescreen aspect ratio, well
+       suited to a geographic map. Adjust to taste.
+       ═══════════════════════════════════════════════════════════════════ */
+    .map-responsive {
+      position: relative;
+      width: 100%;
+      padding-bottom: 62%;
+      height: 0;
+      overflow: hidden;
+      border: 0.5px solid var(--gold-dim);
+      box-shadow: 0 0 0 1px rgba(139, 105, 20, 0.15);
+    }
 
-        @media (max-width: 600px) {
-            .form-container {
-                padding: 30px 20px;
-                margin: 10px;
-            }
-            
-            h1 {
-                font-size: 1.8em;
-            }
-        }
-    </style>
+    .map-responsive iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       DESCRIPTION BLOCK
+       Prose beneath the map: submission instructions and contact link.
+       Bordered block matching the hub's intro text style.
+       ═══════════════════════════════════════════════════════════════════ */
+    .description-block {
+      text-align: left;
+      padding: 16px 24px;
+      border-left:  0.5px solid var(--gold-dim);
+      border-right: 0.5px solid var(--gold-dim);
+      margin-top: 20px;
+    }
+
+    .description-block p {
+      font-size: 14px;
+      font-style: italic;
+      color: var(--cream-body);
+      line-height: 1.85;
+    }
+
+    /* Links within the description block */
+    .description-block a {
+      color: var(--rubric);
+      text-decoration: none;
+      border-bottom: 0.5px solid var(--gold-dim);
+      padding-bottom: 1px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .description-block a:hover {
+      color: var(--gold);
+      border-color: var(--gold-mid);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       FORM SECTION HEADING
+       ═══════════════════════════════════════════════════════════════════ */
+    .form-heading {
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      font-weight: 400;
+      margin-bottom: 20px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       FORM LAYOUT
+       ═══════════════════════════════════════════════════════════════════ */
+    .contact-form {
+      text-align: left;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    /* Form labels */
+    .form-group label {
+      display: block;
+      font-size: 11px;
+      font-style: italic;
+      letter-spacing: 0.08em;
+      color: var(--gold-dim);
+      margin-bottom: 6px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       FORM INPUTS, SELECTS, TEXTAREA
+       Parchment background with gold border.
+       font-family declared explicitly — browsers do not inherit custom
+       fonts into form elements by default.
+       ═══════════════════════════════════════════════════════════════════ */
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
+      width: 100%;
+      padding: 10px 14px;
+      background: var(--parchment);
+      border: 0.5px solid var(--gold-mid);
+      border-radius: 2px;
+      font-family: var(--font);
+      font-size: 14px;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s ease, background 0.2s ease;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+      color: var(--cream-dim);
+      font-style: italic;
+    }
+
+    .contact-form input:focus,
+    .contact-form select:focus,
+    .contact-form textarea:focus {
+      border-color: var(--gold);
+      background: #fdf8ee;
+    }
+
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    /* Custom select arrow using an inline SVG data URI */
+    .contact-form select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%238b6914' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       TWO-COLUMN FORM ROW
+       City + State sit side by side on wider screens, stack on mobile.
+       ═══════════════════════════════════════════════════════════════════ */
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 480px) {
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       SUBMIT BUTTON
+       Transparent with gold border; rubric-colored text.
+       Matches the ACNA and CofE pages exactly.
+       ═══════════════════════════════════════════════════════════════════ */
+    .submit-btn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      margin-top: 8px;
+      background: transparent;
+      border: 0.5px solid var(--gold-mid);
+      border-radius: 2px;
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--rubric);
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .submit-btn:hover {
+      background: rgba(139, 105, 20, 0.08);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .submit-btn:active {
+      background: rgba(139, 105, 20, 0.15);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       STATUS MESSAGE
+       Shown after form submission. Fades in/out via .show class.
+       ═══════════════════════════════════════════════════════════════════ */
+    .status-message {
+      margin-top: 16px;
+      padding: 12px 16px;
+      border-radius: 2px;
+      text-align: center;
+      font-size: 13px;
+      font-style: italic;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .status-message.show  { opacity: 1; }
+
+    .status-message.success {
+      background: rgba(30, 58, 42, 0.6);
+      color: #9ec89a;
+      border: 0.5px solid #3a6b48;
+    }
+
+    .status-message.error {
+      background: rgba(92, 30, 46, 0.5);
+      color: #d4a0a8;
+      border: 0.5px solid #7a3040;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       LOADING SPINNER
+       Shown inside the submit button while the request is in flight.
+       ═══════════════════════════════════════════════════════════════════ */
+    .loading {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 1.5px solid rgba(180, 140, 60, 0.3);
+      border-radius: 50%;
+      border-top-color: var(--gold-mid);
+      animation: spin 0.9s linear infinite;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       RESPONSIVE ADJUSTMENTS
+       ═══════════════════════════════════════════════════════════════════ */
+    @media (max-width: 600px) {
+      body               { padding: 36px 18px 48px; }
+      .main-title        { font-size: 22px; letter-spacing: 0.07em; }
+      .description-block { padding: 14px 16px; font-size: 13px; }
+    }
+
+  </style>
 </head>
+
 <body>
-    <div class="form-container">
-        <h1>Anglican Church of Australia Traditional BCP Parishes</h1>
-        <div class="map-responsive">
-        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1wQiVnQ-QK6kpy3bskAigQE9gHpZa5Hg&ehbc=2E312F" width="500" height="350" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-        <p>
-          <h4>If you know of a traditional BCP parish not currently listed on the map, enter it here and it will be reviewed for addition.
-              Please contact <a href="https://josiah-leinbach.github.io/profile/" title="Josiah Leinbach" target="_blank" rel="noopener noreferrer">Josiah Leinbach</a> with corrections or updates (contact information is at the bottom of the page).
-          </h4>
-        </p>
-        <form name="submit-to-google-sheet" id="contactForm">
-            <div class="form-group">
-                <input type="hidden" name="timestamp" id="timestamp">
-                  <script>
-                    document.getElementById('timestamp').value = new Date().toLocaleString();
-                  </script>
-            </div>
-            <div class="form-group">
-                <label for="parish-name">Parish Name *</label>
-                <input type="text" id="parish-name" name="parish-name" placeholder="e.g. Holy Trinity" required>
-            </div>
+  <div class="leaf">
 
-            <div class="form-group">
-                <label for="address">Street Address *</label>
-                <input type="text" id="street-address" name="street-address" placeholder="e.g. 123 Main Street" required>
-            </div>
+    <!-- ── Back link to hub ─────────────────────────────────────────
+      Returns the visitor to the province directory.
+      Update href if the hub page is ever renamed or moved.
+    ──────────────────────────────────────────────────────────────── -->
+    <a class="back-link" href="parishes_map_form.html">
+      Parish Directory
+    </a>
 
-            <div class="form-group">
-                <label for="city">City *</label>
-                <input type="text" id="city" name="city" placeholder="e.g. Sydney" required>
-            </div>
+    <!-- ── Running head ────────────────────────────────────────────── -->
+    <p class="running-head">A Directory of Traditional Worship</p>
 
-            <div class="form-group">
-                <label for="state">State *</label>
-                <input type="text" id="state" name="state" placeholder="e.g. NSW" required>
-            </div>
-            <div class="form-group">
-                <label for="diocese">Diocese *</label>
-                <select id="diocese" name="diocese" required>
-                    <option value="" disabled selected>Select a diocese</option>
-                    <option value="Diocese of Adelaide">Diocese of Adelaide</option>
-                    <option value="Diocese of Armidale">Diocese of Armidale</option>
-                    <option value="Diocese of Ballarat">Diocese of Ballarat</option>
-                    <option value="Diocese of Bathurst">Diocese of Bathurst</option>
-                    <option value="Diocese of Bendigo">Diocese of Bendigo</option>
-                    <option value="Diocese of Brisbane">Diocese of Brisbane</option>
-                    <option value="Diocese of Canberra Goulburn">Diocese of Canberra Goulburn</option>
-                    <option value="Diocese of Gippsland">Diocese of Gippsland</option>
-                    <option value="Diocese of Grafton">Diocese of Grafton</option>
-                    <option value="Diocese of Melbourne">Diocese of Melbourne</option>
-                    <option value="Diocese of Newcastle">Diocese of Newcastle</option>
-                    <option value="Diocese of North Queensland">Diocese of North Queensland</option>
-                    <option value="Diocese of North West Australia">Diocese of North West Australia</option>
-                    <option value="Diocese of Northern Territory">Diocese of Northern Territory</option>
-                    <option value="Diocese of Perth">Diocese of Perth</option>
-                    <option value="Diocese of Riverina">Diocese of Riverina</option>
-                    <option value="Diocese of Rockhampton">Diocese of Rockhampton</option>
-                    <option value="Diocese of Sydney">Diocese of Sydney</option>
-                    <option value="Diocese of Tasmania">Diocese of Tasmania</option>
-                    <option value="Diocese of The Murray">Diocese of The Murray</option>
-                    <option value="Diocese of Wangaratta">Diocese of Wangaratta</option>
-                    <option value="Diocese of Willochra">Diocese of Willochra</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="churchmanship">Churchmanship *</label>
-                <select id="churchmanship" name="churchmanship" required>
-                    <option value="" disabled selected>Select the option that best describes the parish</option>
-                    <option value="Reformed Conformist">Reformed Conformist</option>
-                    <option value="Low Church Evangelical">Low Church Evangelical</option>
-                    <option value="Old High Church">Old High Church</option>
-                    <option value="Anglo-Catholic">Anglo-Catholic</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="bcp">BCP *</label>
-                <select id="bcp" name="bcp" required>
-                    <option value="" disabled selected>Select the parish's BCP</option>
-                    <option value="1662 BCP">1662 BCP</option>
-                    <option value="1978 AAPB">1978 AAPB</option>
-                    <option value="1995 APBA">1995 APBA</option>
-                    <option value="2012 Common Prayer">2012 Common Prayer</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="service">Service *</label>
-                <select id="service" name="service" required>
-                    <option value="" disabled selected>Select which services the BCP is used in</option>
-                    <option value="Sunday service">Sunday service</option>
-                    <option value="Secondary/occasional service">Secondary/occasional service</option>
-                    <option value="Both">Both</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="male-rector">Male Rector *</label>
-                <select id="male-rector" name="male-rector" required>
-                    <option value="" disabled selected>Y/N</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="website">Website. (If none, then Facebook page or email address.)</label>
-                <input type="text" id="website" name="website" placeholder="Website">
-            </div>
-            <div class="form-group">
-                <label for="note">Note (optional)</label>
-                <input type="text" id="note" name="note" placeholder="Note (optional)">
-            </div>
-            <button type="submit" class="submit-btn" id="submitBtn">
-                Submit
-            </button>
+    <!-- ── Main title ──────────────────────────────────────────────── -->
+    <h1 class="main-title">
+      Traditional BCP Parishes
+    </h1>
 
-            <div id="statusMessage" class="status-message"></div>
-        </form>
+    <!-- ── Opening thick-thin rule pair ───────────────────────────── -->
+    <div class="rule-pair">
+      <hr class="rule-thick">
+      <hr class="rule-thin">
     </div>
 
-    <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbzwjO8XLJa3T97FxA5yd7CCvn1wnHR_Bf3u2tsPb9tNIZYnCM_hP5q-BDPN_PtZ97mpnQ/exec'
-        const form = document.forms['submit-to-google-sheet']
-        const submitBtn = document.getElementById('submitBtn')
-        const statusMessage = document.getElementById('statusMessage')
+    <!-- ── Rubric: province identification ─────────────────────────── -->
+    <p class="rubric">Anglican Church of Australia</p>
 
-        function showMessage(message, type) {
-            statusMessage.textContent = message
-            statusMessage.className = `status-message show ${type}`
-            setTimeout(() => {
-                statusMessage.classList.remove('show')
-            }, 5000)
+    <!-- ══════════════════════════════════════════════════════════════
+         MAP
+         To update the map, replace the src URL in the <iframe>.
+         Adjust padding-bottom on .map-responsive to change height:
+           56.25% = 16:9  |  62% = slightly taller  |  75% = 4:3
+         ══════════════════════════════════════════════════════════════ -->
+    <div class="map-responsive">
+      <iframe
+        src="https://www.google.com/maps/d/u/0/embed?mid=1wQiVnQ-QK6kpy3bskAigQE9gHpZa5Hg&ehbc=2E312F"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Map of Anglican Church of Australia Traditional BCP Parishes">
+      </iframe>
+    </div>
+
+    <!-- ── Description block ───────────────────────────────────────── -->
+    <!--
+      Edit the text inside <p> to update the prose beneath the map.
+    -->
+    <div class="description-block">
+      <p>
+        If you know of a traditional BCP parish not currently listed on the
+        map, enter it below and it will be reviewed for addition. Please
+        contact
+        <a
+          href="https://josiah-leinbach.github.io/profile/"
+          title="Josiah Leinbach"
+          target="_blank"
+          rel="noopener noreferrer">Josiah Leinbach</a>
+        with corrections or updates.
+      </p>
+    </div>
+
+    <!-- ── Section break before the form ──────────────────────────── -->
+    <div class="rule-pair" style="margin-top: 24px;">
+      <hr class="rule-thick">
+      <hr class="rule-thin">
+    </div>
+
+    <!-- ── Form section heading ────────────────────────────────────── -->
+    <p class="form-heading">Submit a Parish</p>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         SUBMISSION FORM
+         The form name, all field name= attributes, and the Google
+         Sheets script URL are preserved exactly from the original.
+         Do not change the name= attributes — the Apps Script uses
+         them to map data to the correct spreadsheet columns.
+
+         Fields unique to this form vs. the ACNA page:
+           - state          (Australian state abbreviation)
+           - churchmanship
+           - bcp            (Australian-specific prayer book options)
+           - service
+           - male-rector
+           - timestamp      (hidden, auto-populated by JavaScript)
+
+         Fields unique to this form vs. the CofE page:
+           - state          (instead of postcode)
+           - bcp            (instead of no bcp field)
+           - No ceec-affiliation field
+         ══════════════════════════════════════════════════════════════ -->
+    <form
+      name="submit-to-google-sheet"
+      id="contactForm"
+      class="contact-form"
+    >
+
+      <!-- Hidden timestamp — auto-populated on page load.
+           Re-populated after a successful reset so repeat submissions
+           record the correct time. Do not remove this field. -->
+      <div class="form-group" style="display: none;">
+        <input type="hidden" name="timestamp" id="timestamp">
+      </div>
+
+      <!-- Parish Name -->
+      <div class="form-group">
+        <label for="parish-name">Parish Name *</label>
+        <input
+          type="text"
+          id="parish-name"
+          name="parish-name"
+          placeholder="e.g. Holy Trinity"
+          required
+        >
+      </div>
+
+      <!-- Street Address -->
+      <div class="form-group">
+        <label for="street-address">Street Address *</label>
+        <input
+          type="text"
+          id="street-address"
+          name="street-address"
+          placeholder="e.g. 123 Main Street"
+          required
+        >
+      </div>
+
+      <!-- City and State on one row (stack on mobile) -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="city">City *</label>
+          <input
+            type="text"
+            id="city"
+            name="city"
+            placeholder="e.g. Sydney"
+            required
+          >
+        </div>
+        <div class="form-group">
+          <label for="state">State *</label>
+          <input
+            type="text"
+            id="state"
+            name="state"
+            placeholder="e.g. NSW"
+            required
+          >
+        </div>
+      </div>
+
+      <!-- Diocese -->
+      <div class="form-group">
+        <label for="diocese">Diocese *</label>
+        <select id="diocese" name="diocese" required>
+          <option value="" disabled selected>Select a diocese</option>
+          <option value="Diocese of Adelaide">Diocese of Adelaide</option>
+          <option value="Diocese of Armidale">Diocese of Armidale</option>
+          <option value="Diocese of Ballarat">Diocese of Ballarat</option>
+          <option value="Diocese of Bathurst">Diocese of Bathurst</option>
+          <option value="Diocese of Bendigo">Diocese of Bendigo</option>
+          <option value="Diocese of Brisbane">Diocese of Brisbane</option>
+          <option value="Diocese of Canberra Goulburn">Diocese of Canberra Goulburn</option>
+          <option value="Diocese of Gippsland">Diocese of Gippsland</option>
+          <option value="Diocese of Grafton">Diocese of Grafton</option>
+          <option value="Diocese of Melbourne">Diocese of Melbourne</option>
+          <option value="Diocese of Newcastle">Diocese of Newcastle</option>
+          <option value="Diocese of North Queensland">Diocese of North Queensland</option>
+          <option value="Diocese of North West Australia">Diocese of North West Australia</option>
+          <option value="Diocese of Northern Territory">Diocese of Northern Territory</option>
+          <option value="Diocese of Perth">Diocese of Perth</option>
+          <option value="Diocese of Riverina">Diocese of Riverina</option>
+          <option value="Diocese of Rockhampton">Diocese of Rockhampton</option>
+          <option value="Diocese of Sydney">Diocese of Sydney</option>
+          <option value="Diocese of Tasmania">Diocese of Tasmania</option>
+          <option value="Diocese of The Murray">Diocese of The Murray</option>
+          <option value="Diocese of Wangaratta">Diocese of Wangaratta</option>
+          <option value="Diocese of Willochra">Diocese of Willochra</option>
+        </select>
+      </div>
+
+      <!-- Churchmanship -->
+      <div class="form-group">
+        <label for="churchmanship">Churchmanship *</label>
+        <select id="churchmanship" name="churchmanship" required>
+          <option value="" disabled selected>Select the option that best describes the parish</option>
+          <option value="Reformed Conformist">Reformed Conformist</option>
+          <option value="Low Church Evangelical">Low Church Evangelical</option>
+          <option value="Old High Church">Old High Church</option>
+          <option value="Anglo-Catholic">Anglo-Catholic</option>
+        </select>
+      </div>
+
+      <!-- Prayer Book — Australian-specific options -->
+      <div class="form-group">
+        <label for="bcp">Prayer Book *</label>
+        <select id="bcp" name="bcp" required>
+          <option value="" disabled selected>Select the parish's prayer book</option>
+          <option value="1662 BCP">1662 BCP</option>
+          <option value="1978 AAPB">1978 AAPB</option>
+          <option value="1995 APBA">1995 APBA</option>
+          <option value="2012 Common Prayer">2012 Common Prayer</option>
+        </select>
+      </div>
+
+      <!-- Service -->
+      <div class="form-group">
+        <label for="service">Service *</label>
+        <select id="service" name="service" required>
+          <option value="" disabled selected>Select which services the BCP is used in</option>
+          <option value="Sunday service">Sunday service</option>
+          <option value="Secondary/occasional service">Secondary / occasional service</option>
+          <option value="Both">Both</option>
+        </select>
+      </div>
+
+      <!-- Male Rector -->
+      <div class="form-group">
+        <label for="male-rector">Male Rector *</label>
+        <select id="male-rector" name="male-rector" required>
+          <option value="" disabled selected>Y / N</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+
+      <!-- Website -->
+      <div class="form-group">
+        <label for="website">Website (or Facebook page / email address if no website)</label>
+        <input
+          type="text"
+          id="website"
+          name="website"
+          placeholder="e.g. holytrinitysydney.org.au"
+        >
+      </div>
+
+      <!-- Note (optional) -->
+      <div class="form-group">
+        <label for="note">Note (optional)</label>
+        <input
+          type="text"
+          id="note"
+          name="note"
+          placeholder="Any additional information"
+        >
+      </div>
+
+      <!-- Submit button -->
+      <button type="submit" class="submit-btn" id="submitBtn">
+        Submit Parish
+      </button>
+
+      <!-- Status message — populated by JavaScript after submission -->
+      <div id="statusMessage" class="status-message"></div>
+
+    </form>
+
+    <!-- ── Closing rule pair ────────────────────────────────────────── -->
+    <div class="rule-pair-close" style="margin-top: 32px;">
+      <hr class="rule-thin">
+      <hr class="rule-thick" style="margin-top: 3px;">
+    </div>
+
+  </div>
+  <!-- end .leaf -->
+
+  <!--
+  ═══════════════════════════════════════════════════════════════════════
+  FORM SUBMISSION SCRIPT
+
+  The scriptURL points to the ACA Google Sheet — different from both
+  the ACNA and CofE endpoints. Do not swap them.
+
+  On page load: the hidden timestamp input is filled with the current
+  date and time. After a successful reset it is re-populated so that
+  repeat submissions in one session record the correct time.
+  ═══════════════════════════════════════════════════════════════════════
+  -->
+  <script>
+    // Populate the hidden timestamp field when the page first loads.
+    document.getElementById('timestamp').value = new Date().toLocaleString()
+
+    // The Google Apps Script URL for the ACA spreadsheet.
+    // Different from the ACNA and CofE scriptURLs — do not swap them.
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzwjO8XLJa3T97FxA5yd7CCvn1wnHR_Bf3u2tsPb9tNIZYnCM_hP5q-BDPN_PtZ97mpnQ/exec'
+
+    const form          = document.forms['submit-to-google-sheet']
+    const submitBtn     = document.getElementById('submitBtn')
+    const statusMessage = document.getElementById('statusMessage')
+
+    // showMessage: displays a temporary status banner below the form.
+    // message = string to display
+    // type    = 'success' or 'error'
+    function showMessage(message, type) {
+      statusMessage.textContent = message
+      statusMessage.className = `status-message show ${type}`
+      setTimeout(() => {
+        statusMessage.classList.remove('show')
+      }, 5000)
+    }
+
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+
+      // Disable button and show spinner while request is in flight
+      submitBtn.disabled = true
+      submitBtn.innerHTML = '<span class="loading"></span>Submitting…'
+
+      fetch(scriptURL, {
+        method: 'POST',
+        body: new FormData(form)
+      })
+      .then(response => {
+        if (response.ok) {
+          showMessage('Parish submitted successfully. Thank you.', 'success')
+          form.reset()
+          // Re-populate the timestamp after reset clears it
+          document.getElementById('timestamp').value = new Date().toLocaleString()
+        } else {
+          throw new Error('Network response was not ok')
         }
+      })
+      .catch(error => {
+        console.error('Submission error:', error.message)
+        showMessage('Error submitting parish. Please try again.', 'error')
+      })
+      .finally(() => {
+        // Always re-enable the button when the request completes
+        submitBtn.disabled = false
+        submitBtn.innerHTML = 'Submit Parish'
+      })
+    })
+  </script>
 
-        form.addEventListener('submit', e => {
-            e.preventDefault()
-            
-            // Show loading state
-            submitBtn.disabled = true
-            submitBtn.innerHTML = '<span class="loading"></span>Submitting...'
-            
-            fetch(scriptURL, { 
-                method: 'POST', 
-                body: new FormData(form)
-            })
-            .then(response => {
-                if (response.ok) {
-                    showMessage('Parish submitted successfully! Thank you.', 'success')
-                    form.reset() // Clear the form
-                } else {
-                    throw new Error('Network response was not ok')
-                }
-            })
-            .catch(error => {
-                console.error('Error!', error.message)
-                showMessage('Error submitting parish. Please try again.', 'error')
-            })
-            .finally(() => {
-                // Reset button state
-                submitBtn.disabled = false
-                submitBtn.innerHTML = 'Submit'
-            })
-        })
-    </script>
 </body>
 </html>
