@@ -1,336 +1,772 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Traditional BCP Parishes Map</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ACNA Traditional BCP Parishes</title>
 
-        body {
-            font-family: 'Garamond', serif;
-            background-image: url('https://upload.wikimedia.org/wikipedia/commons/0/0a/Canaletto_-_St._Paul%27s_Cathedral_-_Google_Art_Project.jpg');
-            background-size: cover;
-            background-position-x: 65%;
-            min-height: 40vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding-top: 45px;
-            padding-bottom: 45px;
-        }
+  <!--
+  ═══════════════════════════════════════════════════════════════════════
+  FONT IMPORT
+  Cormorant Garamond, matching the hub page (parishes_map_form.html).
+  - weight 400 = regular (body text, labels, descriptive prose)
+  - weight 600 = semibold (headings, abbreviations)
+  - ital   = italic variant (rubric, intro text, form labels)
+  ═══════════════════════════════════════════════════════════════════════
+  -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap"
+    rel="stylesheet"
+  >
 
-        .form-container {
-            background: rgba(255, 255, 255, 0.70);
-            backdrop-filter: blur(20px);
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 550px;
-            transform: translateY(0);
-            transition: all 0.3s ease;
-        }
-        
-        .map-responsive{
-          overflow:hidden;
-          padding-bottom:56.25%;
-          position:relative;
-          height:0;
-        }
- 
-        .map-responsive iframe{
-          left:0;
-          top:0;
-          height:100%;
-          width:100%;
-          position:absolute;
-        }
+  <style>
 
-        .form-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-        }
+    /* ═══════════════════════════════════════════════════════════════════
+       CSS VARIABLES
+       These match the hub page exactly. Change a value here and it
+       updates the entire page at once.
+       ═══════════════════════════════════════════════════════════════════ */
+    :root {
+      --navy:        #0f1a2e;   /* page background */
+      --gold:        #d4b870;   /* primary headings */
+      --gold-mid:    #c4922a;   /* rules and borders */
+      --gold-dim:    #8b6914;   /* subdued labels, thin rules */
+      --gold-ghost:  #6b5a38;   /* running head, numerals, back-link */
+      --rubric:      #b5651d;   /* burnt orange — BCP "red" */
+      --cream-body:  #b8a882;   /* descriptive prose */
+      --cream-dim:   #8b7a58;   /* secondary labels */
+      --parchment:   #f5f0e4;   /* form input backgrounds */
+      --parchment-mid: #e8dfc8; /* form input borders at rest */
+      --ink:         #2c2416;   /* form input text */
+      --font:        'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    }
 
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 2.2em;
-            font-weight: 300;
-            letter-spacing: -1px;
-        }
+    /* ═══════════════════════════════════════════════════════════════════
+       RESET & BASE
+       ═══════════════════════════════════════════════════════════════════ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        .form-group {
-            margin-bottom: 12px;
-            position: relative;
-        }
+    body {
+      background-color: var(--navy);
+      font-family: var(--font);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      /* No justify-content: center here — this page is long, so we
+         let it scroll naturally from the top rather than centering
+         a tall column in the viewport. */
+      padding: 48px 24px 64px;
+      /* Faint diagonal texture matching the hub page */
+      background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255, 220, 120, 0.015) 0px,
+        rgba(255, 220, 120, 0.015) 1px,
+        transparent 1px,
+        transparent 12px
+      );
+    }
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #555;
-            font-weight: 500;
-            font-size: 0.95em;
-            transition: color 0.3s ease;
-        }
+    /* ═══════════════════════════════════════════════════════════════════
+       THE LEAF
+       Wider than the hub (720px) to give the map and form room to breathe.
+       The hub is a title page (560px); this is a working page.
+       ═══════════════════════════════════════════════════════════════════ */
+    .leaf {
+      width: 100%;
+      max-width: 720px;
+      text-align: center;
+      animation: fadein 1.1s ease both;
+    }
 
-        input, textarea, select {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #e1e5e9;
-            border-radius: 12px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            background: #fafbfc;
-            outline: none;
-        }
+    @keyframes fadein {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0);   }
+    }
 
-        input:focus, textarea:focus, select:focus {
-            border-color: #667eea;
-            background: white;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-            transform: translateY(-2px);
-        }
+    /* ═══════════════════════════════════════════════════════════════════
+       BACK LINK
+       Returns the visitor to the hub (the province directory).
+       Mirrors the hub's own back-link to the portfolio.
+       ═══════════════════════════════════════════════════════════════════ */
+    .back-link {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold-ghost);
+      text-decoration: none;
+      margin-bottom: 28px;
+      transition: color 0.2s ease;
+    }
 
-        input:focus + label, textarea:focus + label, select:focus + label {
-            color: #667eea;
-        }
+    .back-link:hover {
+      color: var(--gold-dim);
+    }
 
-        textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
+    .back-link::before {
+      content: '← ';
+      letter-spacing: 0.04em;
+    }
 
-        .submit-btn {
-            width: 100%;
-            background: linear-gradient(135deg, #af9674 0%, #6b8588 100%);
-            color: white;
-            padding: 18px;
-            border: none;
-            border-radius: 12px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
-        }
+    /* ═══════════════════════════════════════════════════════════════════
+       RUNNING HEAD
+       ═══════════════════════════════════════════════════════════════════ */
+    .running-head {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-ghost);
+      font-weight: 400;
+      margin-bottom: 18px;
+    }
 
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-        }
+    /* ═══════════════════════════════════════════════════════════════════
+       MAIN TITLE
+       ═══════════════════════════════════════════════════════════════════ */
+    .main-title {
+      font-size: 30px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
 
-        .submit-btn:active {
-            transform: translateY(0);
-        }
+    /* ═══════════════════════════════════════════════════════════════════
+       THICK-THIN RULE PAIR
+       Identical to the hub. Used to open and close major sections.
+       ═══════════════════════════════════════════════════════════════════ */
+    .rule-pair {
+      margin: 14px 0;
+    }
 
-        .submit-btn:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-        }
+    .rule-pair hr {
+      border: none;
+      margin: 0;
+    }
 
-        .status-message {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            font-weight: 500;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
+    .rule-thick {
+      border-top: 1.8px solid var(--gold-mid);
+    }
 
-        .status-message.show {
-            opacity: 1;
-        }
+    .rule-thin {
+      border-top: 0.5px solid var(--gold-mid);
+      margin-top: 3px !important;
+      opacity: 0.65;
+    }
 
-        .status-message.success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
+    /* Reversed rule pair (thin then thick) — used as section closers */
+    .rule-pair-close {
+      margin: 14px 0;
+    }
 
-        .status-message.error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
+    .rule-pair-close hr {
+      border: none;
+      margin: 0;
+    }
 
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-            margin-right: 10px;
-        }
+    /* ═══════════════════════════════════════════════════════════════════
+       RUBRIC LINE
+       Identifies the province in burnt-orange italic.
+       ═══════════════════════════════════════════════════════════════════ */
+    .rubric {
+      font-size: 13px;
+      font-style: italic;
+      color: var(--rubric);
+      letter-spacing: 0.03em;
+      margin-bottom: 20px;
+    }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+    /* ═══════════════════════════════════════════════════════════════════
+       MAP SECTION
+       The iframe uses the "responsive embed" technique:
+       - The wrapper (.map-responsive) is given a percentage padding-bottom
+         to set its height as a ratio of its width.
+       - The iframe is absolutely positioned to fill that wrapper.
+       - padding-bottom: 62% gives a wider-than-HD aspect ratio, which
+         suits a geographic map better than the original 56.25% (16:9).
+       To change the map height, adjust the padding-bottom percentage.
+       ═══════════════════════════════════════════════════════════════════ */
+    .map-responsive {
+      position: relative;
+      width: 100%;
+      padding-bottom: 62%;   /* controls map height — increase to make taller */
+      height: 0;
+      overflow: hidden;
+      border: 0.5px solid var(--gold-dim);
+      /* Slight inner glow on the border to lift the map from the background */
+      box-shadow: 0 0 0 1px rgba(139, 105, 20, 0.15);
+    }
 
-        @media (max-width: 600px) {
-            .form-container {
-                padding: 30px 20px;
-                margin: 10px;
-            }
-            
-            h1 {
-                font-size: 1.8em;
-            }
-        }
-    </style>
+    .map-responsive iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       DESCRIPTIVE PARAGRAPH
+       The prose beneath the map explaining the project and linking
+       to related pages. Left-aligned for readability at this width.
+       ═══════════════════════════════════════════════════════════════════ */
+    .description {
+      text-align: left;
+      font-size: 14px;
+      font-style: italic;
+      color: var(--cream-body);
+      line-height: 1.85;
+      margin: 20px 0;
+      padding: 16px 24px;
+      border-left:  0.5px solid var(--gold-dim);
+      border-right: 0.5px solid var(--gold-dim);
+    }
+
+    /* Links within the description paragraph */
+    .description a {
+      color: var(--rubric);
+      text-decoration: none;
+      border-bottom: 0.5px solid var(--gold-dim);
+      padding-bottom: 1px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .description a:hover {
+      color: var(--gold);
+      border-color: var(--gold-mid);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       FORM SECTION HEADING
+       Introduces the submission form using the hub's spaced-caps style.
+       ═══════════════════════════════════════════════════════════════════ */
+    .form-heading {
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      font-weight: 400;
+      margin-bottom: 20px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       FORM LAYOUT
+       The form is left-aligned within the leaf. Each field group
+       (label + input) is stacked vertically with consistent spacing.
+       ═══════════════════════════════════════════════════════════════════ */
+    .contact-form {
+      text-align: left;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    /* Form labels — small spaced italic, gold-dim */
+    .form-group label {
+      display: block;
+      font-size: 11px;
+      font-style: italic;
+      letter-spacing: 0.08em;
+      color: var(--gold-dim);
+      margin-bottom: 6px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       FORM INPUTS, SELECTS, TEXTAREA
+       Parchment background with gold border — consistent with the
+       Scholar's Study palette. The font-family declaration is required
+       because browsers do not inherit custom fonts into form elements
+       by default.
+       ═══════════════════════════════════════════════════════════════════ */
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
+      width: 100%;
+      padding: 10px 14px;
+      background: var(--parchment);
+      border: 0.5px solid var(--gold-mid);
+      border-radius: 2px;        /* very slight corner — period-appropriate */
+      font-family: var(--font);
+      font-size: 14px;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s ease, background 0.2s ease;
+      /* Remove browser default appearance on selects */
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    /* Placeholder text color */
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+      color: var(--cream-dim);
+      font-style: italic;
+    }
+
+    /* Focus state — gold-mid border, slightly brighter background */
+    .contact-form input:focus,
+    .contact-form select:focus,
+    .contact-form textarea:focus {
+      border-color: var(--gold);
+      background: #fdf8ee;
+    }
+
+    /* Textarea — taller minimum height for the note field */
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    /* Custom select arrow — SVG encoded as a data URI so no external
+       file is needed. The arrow uses the --gold-dim color. */
+    .contact-form select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%238b6914' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;   /* room for the arrow */
+      cursor: pointer;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       TWO-COLUMN FORM ROW
+       Short fields (City + State/Province) sit side by side on wider
+       screens to reduce vertical scrolling.
+       On narrow screens they stack back to a single column.
+       ═══════════════════════════════════════════════════════════════════ */
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 480px) {
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       SUBMIT BUTTON
+       Styled as a rubric response — uppercase spaced text in the
+       burnt-orange rubric color, with a gold border.
+       ═══════════════════════════════════════════════════════════════════ */
+    .submit-btn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      margin-top: 8px;
+      background: transparent;
+      border: 0.5px solid var(--gold-mid);
+      border-radius: 2px;
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--rubric);
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .submit-btn:hover {
+      background: rgba(139, 105, 20, 0.08);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .submit-btn:active {
+      background: rgba(139, 105, 20, 0.15);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       STATUS MESSAGE
+       Shown after form submission — success or error.
+       Fades in and out via the .show class toggled by JavaScript.
+       ═══════════════════════════════════════════════════════════════════ */
+    .status-message {
+      margin-top: 16px;
+      padding: 12px 16px;
+      border-radius: 2px;
+      text-align: center;
+      font-size: 13px;
+      font-style: italic;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .status-message.show {
+      opacity: 1;
+    }
+
+    /* Success: muted green on dark background */
+    .status-message.success {
+      background: rgba(30, 58, 42, 0.6);
+      color: #9ec89a;
+      border: 0.5px solid #3a6b48;
+    }
+
+    /* Error: muted red on dark background */
+    .status-message.error {
+      background: rgba(92, 30, 46, 0.5);
+      color: #d4a0a8;
+      border: 0.5px solid #7a3040;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       LOADING SPINNER
+       Shown inside the submit button while the fetch request is in
+       flight. Pure CSS — no images or libraries needed.
+       ═══════════════════════════════════════════════════════════════════ */
+    .loading {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 1.5px solid rgba(180, 140, 60, 0.3);
+      border-radius: 50%;
+      border-top-color: var(--gold-mid);
+      animation: spin 0.9s linear infinite;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       RESPONSIVE ADJUSTMENTS
+       Reduce font sizes on narrow screens. Layout needs no changes —
+       it is already a single column.
+       ═══════════════════════════════════════════════════════════════════ */
+    @media (max-width: 600px) {
+      body          { padding: 36px 18px 48px; }
+      .main-title   { font-size: 22px; letter-spacing: 0.07em; }
+      .description  { padding: 14px 16px; font-size: 13px; }
+    }
+
+  </style>
 </head>
+
 <body>
-    <div class="form-container">
-        <h1>ACNA Traditional BCP Parishes</h1>
-        <div class="map-responsive">
-        <iframe src="https://www.google.com/maps/d/embed?mid=1BWzfgphr2w5r464wtup31Z8xshV3IWo&ehbc=2E312F&noprof=1" width="500" height="350" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-        <p>
-          <h4>If you know of a traditional BCP parish not currently listed on the map, enter it here and it will be reviewed for addition. View searchable list of parishes
-              <a href="bcp_ParishTable.html" title="BCP Parish Table" target="_blank" rel="noopener noreferrer">here</a>. The tradtional BCP map for the Church of England
-              can be found <a href="CofE_traditionalBCP.html" title="CofE parish map" target="_blank" rel="noopener noreferrer">here</a> and for the Anglican Church of Australia
-              <a href="ACA_traditionalBCP.html" title="Anglican Church of Australia parish map" target="_blank" rel="noopener noreferrer">here</a>.
-              Please contact <a href="https://josiah-leinbach.github.io/profile/" title="Josiah Leinbach" target="_blank" rel="noopener noreferrer">Josiah Leinbach</a> with corrections or updates (contact information is at the bottom of the page).
-          </h4>
-        </p>
-        <form name="submit-to-google-sheet" id="contactForm">
-            <div class="form-group">
-                <label for="parish-name">Parish Name *</label>
-                <input type="text" id="parish-name" name="parish-name" placeholder="e.g. Holy Trinity" required>
-            </div>
+  <div class="leaf">
 
-            <div class="form-group">
-                <label for="address">Street Address *</label>
-                <input type="text" id="street-address" name="street-address" placeholder="e.g. 263 Spring Street" required>
-            </div>
+    <!-- ── Back link to hub ─────────────────────────────────────────
+      Returns the visitor to the province directory.
+      Update href if the hub page is ever renamed or moved.
+    ──────────────────────────────────────────────────────────────── -->
+    <a class="back-link" href="parishes_map_form.html">
+      Parish Directory
+    </a>
 
-            <div class="form-group">
-                <label for="city">City *</label>
-                <input type="text" id="city" name="city" placeholder="e.g. Hillsdale" required>
-            </div>
+    <!-- ── Running head ────────────────────────────────────────────── -->
+    <p class="running-head">A Directory of Traditional Worship</p>
 
-            <div class="form-group">
-                <label for="state">State/Province *</label>
-                <input type="text" id="state" name="state" placeholder="e.g. MI" required>
-            </div>
-            <div class="form-group">
-                <label for="diocese">Diocese *</label>
-                <select id="diocese" name="diocese" required>
-                    <option value="" disabled selected>Select a diocese</option>
-                    <option value="All Nations">All Nations</option>
-                    <option value="All Saints">All Saints</option>
-                    <option value="Armed Forces and Chaplaincy">Armed Forces and Chaplaincy</option>
-                    <option value="Canada">Canada</option>
-                    <option value="Carolinas">Carolinas</option>
-                    <option value="Cascadia">Cascadia</option>
-                    <option value="Central States (REC)">Central States (REC)</option>
-                    <option value="Christ Our Hope">Christ Our Hope</option>
-                    <option value="Churches for the Sake of Others">Churches for the Sake of Others</option>
-                    <option value="Fort Worth">Fort Worth</option>
-                    <option value="Great Lakes">Great Lakes</option>
-                    <option value="Gulf Atlantic">Gulf Atlantic</option>
-                    <option value="Living Word">Living Word</option>
-                    <option value="Mid-America (REC)">Mid-America (REC)</option>
-                    <option value="Mid-Atlantic">Mid-Atlantic</option>
-                    <option value="New England">New England</option>
-                    <option value="Northeast and Mid-Atlantic (REC)">Northeast and Mid-Atlantic (REC)</option>
-                    <option value="Pittsburgh">Pittsburgh</option>
-                    <option value="Quincy">Quincy</option>
-                    <option value="Rocky Mountains">Rocky Mountains</option>
-                    <option value="San Joaquin">San Joaquin</option>
-                    <option value="South">South</option>
-                    <option value="South Carolina">South Carolina</option>
-                    <option value="Southeast (REC)">Southeast (REC)</option>
-                    <option value="Southwest">Southwest</option>
-                    <option value="Upper Midwest">Upper Midwest</option>
-                    <option value="Western Anglicans">Western Anglicans</option>
-                    <option value="Western Gulf Coast">Western Gulf Coast</option>
-                    <option value="UECNA">UECNA*</option>
-                    <option value="Other">Other*</option>
-                </select>
-            </div>
-             <div class="form-group">
-                <label for="website">Website. (If none, then Facebook page or email address.)</label>
-                <input type="text" id="website" name="website" placeholder="Website">
-            </div>
-            <div class="form-group">
-                <label for="bcp-type">Prayer Book *</label>
-                <select id="bcp-type" name="bcp-type" required>
-                    <option value="" disabled selected>Select a Prayer Book</option>
-                    <option value="1662 BCP IE">1662 BCP IE</option>
-                    <option value="1928 BCP">1928 BCP</option>
-                    <option value="1962 BCP (Canada)">1962 BCP (Canada)</option>
-                    <option value="2003 REC BCP">2003 REC BCP</option>
-                    <option value="2019 BCP (1662 Order) or Modern 1552/1662">2019 BCP (1662 Order) or Modern 1552/1662</option>
-                    <option value="2019 BCP (Traditional Language)">2019 BCP (Traditional Language)</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="note">Note (optional)</label>
-                <input type="text" id="note" name="note" placeholder="Note (optional)">
-            </div>
-            <button type="submit" class="submit-btn" id="submitBtn">
-                Submit
-            </button>
+    <!-- ── Main title ──────────────────────────────────────────────── -->
+    <h1 class="main-title">
+      Traditional BCP Parishes
+    </h1>
 
-            <div id="statusMessage" class="status-message"></div>
-        </form>
+    <!-- ── Opening thick-thin rule pair ───────────────────────────── -->
+    <div class="rule-pair">
+      <hr class="rule-thick">
+      <hr class="rule-thin">
     </div>
 
-    <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbwKze56yRfRPKcaGptGf3loDwaUNX6t_-NzPE4_kY7bYyYZWveDmXZTlmD9yaTYiL-m7Q/exec'
-        const form = document.forms['submit-to-google-sheet']
-        const submitBtn = document.getElementById('submitBtn')
-        const statusMessage = document.getElementById('statusMessage')
+    <!-- ── Rubric: province identification ─────────────────────────── -->
+    <p class="rubric">Anglican Church in North America</p>
 
-        function showMessage(message, type) {
-            statusMessage.textContent = message
-            statusMessage.className = `status-message show ${type}`
-            setTimeout(() => {
-                statusMessage.classList.remove('show')
-            }, 5000)
+    <!-- ══════════════════════════════════════════════════════════════
+         MAP
+         The Google Maps embed is unchanged from the original.
+         To update the map, replace the src URL in the <iframe> below.
+         The padding-bottom on .map-responsive controls the height:
+           56.25% = 16:9 (standard video)
+           62%    = slightly taller, better for geographic maps
+           75%    = 4:3, very tall
+         ══════════════════════════════════════════════════════════════ -->
+    <div class="map-responsive">
+      <iframe
+        src="https://www.google.com/maps/d/embed?mid=1BWzfgphr2w5r464wtup31Z8xshV3IWo&ehbc=2E312F&noprof=1"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Map of ACNA Traditional BCP Parishes">
+      </iframe>
+    </div>
+
+    <!-- ── Descriptive paragraph ───────────────────────────────────── -->
+    <!--
+      Edit the text inside <p class="description"> to update the
+      explanatory prose beneath the map. All four links are preserved
+      from the original file.
+    -->
+    <p class="description">
+      If you know of a traditional BCP parish not currently listed on the map,
+      enter it below and it will be reviewed for addition. A searchable list
+      of parishes may be found
+      <a href="bcp_ParishTable.html" title="BCP Parish Table" target="_blank" rel="noopener noreferrer">here</a>.
+      The traditional BCP map for the Church of England may be found
+      <a href="CofE_traditionalBCP.html" title="Church of England parish map" target="_blank" rel="noopener noreferrer">here</a>,
+      and for the Anglican Church of Australia
+      <a href="ACA_traditionalBCP.html" title="Anglican Church of Australia parish map" target="_blank" rel="noopener noreferrer">here</a>.
+      Please contact
+      <a href="https://josiah-leinbach.github.io/profile/" title="Josiah Leinbach" target="_blank" rel="noopener noreferrer">Josiah Leinbach</a>
+      with corrections or updates.
+    </p>
+
+    <!-- ── Section break before the form ──────────────────────────── -->
+    <div class="rule-pair">
+      <hr class="rule-thick">
+      <hr class="rule-thin">
+    </div>
+
+    <!-- ── Form section heading ────────────────────────────────────── -->
+    <p class="form-heading">Submit a Parish</p>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         SUBMISSION FORM
+         The form name, field names, and Google Sheets script URL are
+         all preserved exactly from the original file. Do not change
+         the name= attributes on inputs/selects — the Google Sheets
+         script uses these to map data to the correct columns.
+
+         To add a new field:
+           1. Add a <div class="form-group"> block with a label and input.
+           2. Give the input a name= attribute matching the column header
+              in your Google Sheet.
+         ══════════════════════════════════════════════════════════════ -->
+    <form
+      name="submit-to-google-sheet"
+      id="contactForm"
+      class="contact-form"
+    >
+
+      <!-- Parish Name -->
+      <div class="form-group">
+        <label for="parish-name">Parish Name *</label>
+        <input
+          type="text"
+          id="parish-name"
+          name="parish-name"
+          placeholder="e.g. Holy Trinity"
+          required
+        >
+      </div>
+
+      <!-- Street Address -->
+      <div class="form-group">
+        <label for="street-address">Street Address *</label>
+        <input
+          type="text"
+          id="street-address"
+          name="street-address"
+          placeholder="e.g. 263 Spring Street"
+          required
+        >
+      </div>
+
+      <!-- City and State on one row (stack on mobile) -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="city">City *</label>
+          <input
+            type="text"
+            id="city"
+            name="city"
+            placeholder="e.g. Hillsdale"
+            required
+          >
+        </div>
+        <div class="form-group">
+          <label for="state">State / Province *</label>
+          <input
+            type="text"
+            id="state"
+            name="state"
+            placeholder="e.g. MI"
+            required
+          >
+        </div>
+      </div>
+
+      <!-- Diocese -->
+      <div class="form-group">
+        <label for="diocese">Diocese *</label>
+        <select id="diocese" name="diocese" required>
+          <option value="" disabled selected>Select a diocese</option>
+          <option value="All Nations">All Nations</option>
+          <option value="All Saints">All Saints</option>
+          <option value="Armed Forces and Chaplaincy">Armed Forces and Chaplaincy</option>
+          <option value="Canada">Canada</option>
+          <option value="Carolinas">Carolinas</option>
+          <option value="Cascadia">Cascadia</option>
+          <option value="Central States (REC)">Central States (REC)</option>
+          <option value="Christ Our Hope">Christ Our Hope</option>
+          <option value="Churches for the Sake of Others">Churches for the Sake of Others</option>
+          <option value="Fort Worth">Fort Worth</option>
+          <option value="Great Lakes">Great Lakes</option>
+          <option value="Gulf Atlantic">Gulf Atlantic</option>
+          <option value="Living Word">Living Word</option>
+          <option value="Mid-America (REC)">Mid-America (REC)</option>
+          <option value="Mid-Atlantic">Mid-Atlantic</option>
+          <option value="New England">New England</option>
+          <option value="Northeast and Mid-Atlantic (REC)">Northeast and Mid-Atlantic (REC)</option>
+          <option value="Pittsburgh">Pittsburgh</option>
+          <option value="Quincy">Quincy</option>
+          <option value="Rocky Mountains">Rocky Mountains</option>
+          <option value="San Joaquin">San Joaquin</option>
+          <option value="South">South</option>
+          <option value="South Carolina">South Carolina</option>
+          <option value="Southeast (REC)">Southeast (REC)</option>
+          <option value="Southwest">Southwest</option>
+          <option value="Upper Midwest">Upper Midwest</option>
+          <option value="Western Anglicans">Western Anglicans</option>
+          <option value="Western Gulf Coast">Western Gulf Coast</option>
+          <option value="UECNA">UECNA*</option>
+          <option value="Other">Other*</option>
+        </select>
+      </div>
+
+      <!-- Website -->
+      <div class="form-group">
+        <label for="website">Website (or Facebook page / email address if no website)</label>
+        <input
+          type="text"
+          id="website"
+          name="website"
+          placeholder="e.g. holytrinityhillsdale.org"
+        >
+      </div>
+
+      <!-- Prayer Book -->
+      <div class="form-group">
+        <label for="bcp-type">Prayer Book *</label>
+        <select id="bcp-type" name="bcp-type" required>
+          <option value="" disabled selected>Select a Prayer Book</option>
+          <option value="1662 BCP IE">1662 BCP IE</option>
+          <option value="1928 BCP">1928 BCP</option>
+          <option value="1962 BCP (Canada)">1962 BCP (Canada)</option>
+          <option value="2003 REC BCP">2003 REC BCP</option>
+          <option value="2019 BCP (1662 Order) or Modern 1552/1662">2019 BCP (1662 Order) or Modern 1552/1662</option>
+          <option value="2019 BCP (Traditional Language)">2019 BCP (Traditional Language)</option>
+        </select>
+      </div>
+
+      <!-- Note (optional) -->
+      <div class="form-group">
+        <label for="note">Note (optional)</label>
+        <input
+          type="text"
+          id="note"
+          name="note"
+          placeholder="Any additional information"
+        >
+      </div>
+
+      <!-- Submit button -->
+      <button type="submit" class="submit-btn" id="submitBtn">
+        Submit Parish
+      </button>
+
+      <!-- Status message — populated by JavaScript after submission -->
+      <div id="statusMessage" class="status-message"></div>
+
+    </form>
+
+    <!-- ── Closing rule pair ────────────────────────────────────────── -->
+    <div class="rule-pair-close" style="margin-top: 32px;">
+      <hr class="rule-thin">
+      <hr class="rule-thick" style="margin-top: 3px;">
+    </div>
+
+  </div>
+  <!-- end .leaf -->
+
+  <!--
+  ═══════════════════════════════════════════════════════════════════════
+  FORM SUBMISSION SCRIPT
+  This script intercepts the form's submit event, sends the data to
+  a Google Apps Script endpoint, and shows a success or error message.
+
+  The scriptURL points to your existing Google Sheets integration —
+  do not change it unless you set up a new Apps Script deployment.
+
+  How it works:
+    1. User clicks "Submit Parish" — the button is disabled to prevent
+       double-submission and a spinner is shown.
+    2. fetch() sends the form data as a POST request to the Google
+       Apps Script URL.
+    3. On success: the form is cleared and a success message is shown.
+    4. On failure: an error message is shown.
+    5. The button is re-enabled regardless of outcome (.finally).
+  ═══════════════════════════════════════════════════════════════════════
+  -->
+  <script>
+    // The Google Apps Script URL that writes submissions to your Sheet.
+    // To replace: deploy a new Apps Script and paste the new URL here.
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwKze56yRfRPKcaGptGf3loDwaUNX6t_-NzPE4_kY7bYyYZWveDmXZTlmD9yaTYiL-m7Q/exec'
+
+    const form          = document.forms['submit-to-google-sheet']
+    const submitBtn     = document.getElementById('submitBtn')
+    const statusMessage = document.getElementById('statusMessage')
+
+    // showMessage: displays a temporary status banner below the form.
+    // message = string to display
+    // type    = 'success' or 'error' (controls the color styling)
+    function showMessage(message, type) {
+      statusMessage.textContent = message
+      statusMessage.className = `status-message show ${type}`
+      // Hide the message after 5 seconds
+      setTimeout(() => {
+        statusMessage.classList.remove('show')
+      }, 5000)
+    }
+
+    // Listen for form submission
+    form.addEventListener('submit', e => {
+      e.preventDefault()  // stop the browser's default form POST
+
+      // Disable button and show spinner while request is in flight
+      submitBtn.disabled = true
+      submitBtn.innerHTML = '<span class="loading"></span>Submitting…'
+
+      fetch(scriptURL, {
+        method: 'POST',
+        body: new FormData(form)
+      })
+      .then(response => {
+        if (response.ok) {
+          showMessage('Parish submitted successfully. Thank you.', 'success')
+          form.reset()  // clear all fields on success
+        } else {
+          throw new Error('Network response was not ok')
         }
+      })
+      .catch(error => {
+        console.error('Submission error:', error.message)
+        showMessage('Error submitting parish. Please try again.', 'error')
+      })
+      .finally(() => {
+        // Always re-enable the button when the request completes
+        submitBtn.disabled = false
+        submitBtn.innerHTML = 'Submit Parish'
+      })
+    })
+  </script>
 
-        form.addEventListener('submit', e => {
-            e.preventDefault()
-            
-            // Show loading state
-            submitBtn.disabled = true
-            submitBtn.innerHTML = '<span class="loading"></span>Submitting...'
-            
-            fetch(scriptURL, { 
-                method: 'POST', 
-                body: new FormData(form)
-            })
-            .then(response => {
-                if (response.ok) {
-                    showMessage('Parish submitted successfully! Thank you.', 'success')
-                    form.reset() // Clear the form
-                } else {
-                    throw new Error('Network response was not ok')
-                }
-            })
-            .catch(error => {
-                console.error('Error!', error.message)
-                showMessage('Error submitting parish. Please try again.', 'error')
-            })
-            .finally(() => {
-                // Reset button state
-                submitBtn.disabled = false
-                submitBtn.innerHTML = 'Submit'
-            })
-        })
-    </script>
 </body>
 </html>
