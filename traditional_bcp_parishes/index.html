@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Traditional Anglican Parishes — A Directory</title>
+
+  <!--
+  ═══════════════════════════════════════════════════════════════════════
+  FONT IMPORT
+  Cormorant Garamond: a modern revival of the 16th-century Garamond cut,
+  period-appropriate for the 1662 BCP aesthetic.
+  - weight 400 = regular (body text, secondary labels)
+  - weight 600 = semibold (display headings, abbreviations)
+  - ital = italic variant (rubric, intro text, descriptors)
+  ═══════════════════════════════════════════════════════════════════════
+  -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    /* ═══════════════════════════════════════════════════════════════════
+       CSS VARIABLES
+       Central place to change colors, fonts, and spacing.
+       Edit these values to restyle the whole page at once.
+       ═══════════════════════════════════════════════════════════════════ */
+    :root {
+      --navy:        #0f1a2e;   /* page background — deep Scholar's Study navy */
+      --gold:        #d4b870;   /* primary heading color */
+      --gold-mid:    #c4922a;   /* rule color, mid-weight gold */
+      --gold-dim:    #8b6914;   /* subdued labels, thin rules */
+      --gold-ghost:  #6b5a38;   /* running head, numerals, colophon */
+      --rubric:      #b5651d;   /* burnt orange — the "red" of two-color BCP printing */
+      --cream-body:  #b8a882;   /* intro text and italic descriptors */
+      --cream-dim:   #8b7a58;   /* province full names */
+      --font:        'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       RESET & BASE
+       Removes browser default margins and sets the page foundation.
+       ═══════════════════════════════════════════════════════════════════ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      min-height: 100%;
+    }
+
+    body {
+      background-color: var(--navy);
+      font-family: var(--font);
+      /* Center the leaf (content column) horizontally and vertically */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px 56px;
+      /* Subtle noise-like texture: a very faint repeating diagonal pattern
+         gives the navy background slight depth without being visible at
+         a glance. Adjust opacity (the last value in rgba) to taste. */
+      background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255, 220, 120, 0.015) 0px,
+        rgba(255, 220, 120, 0.015) 1px,
+        transparent 1px,
+        transparent 12px
+      );
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       THE LEAF
+       The centered content column. "leaf" refers to a page of a book.
+       max-width controls the line length of the whole layout.
+       To widen or narrow the design, change max-width here.
+       ═══════════════════════════════════════════════════════════════════ */
+    .leaf {
+      width: 100%;
+      max-width: 560px;
+      text-align: center;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       BACK LINK
+       Returns the visitor to the main portfolio site.
+       Sits above the running head, very quietly.
+       ═══════════════════════════════════════════════════════════════════ */
+    .back-link {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold-ghost);
+      text-decoration: none;
+      margin-bottom: 28px;
+      /* The ← arrow is a unicode character, no image needed */
+      transition: color 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: var(--gold-dim);
+    }
+
+    .back-link::before {
+      content: '← ';
+      letter-spacing: 0.04em;  /* tighten the arrow slightly relative to the text */
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       RUNNING HEAD
+       Small spaced-caps line above the main title.
+       In BCP tradition this identifies the section of the book.
+       ═══════════════════════════════════════════════════════════════════ */
+    .running-head {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-ghost);
+      font-weight: 400;
+      margin-bottom: 18px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       MAIN TITLE
+       The primary heading. Semibold, spaced capitals, large.
+       ═══════════════════════════════════════════════════════════════════ */
+    .main-title {
+      font-size: 32px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       THICK-THIN RULE PAIR
+       The most recognizable typographic feature of the 1662 BCP:
+       a heavy rule immediately above a hairline rule (or vice versa).
+       Used to open and close major sections.
+
+       Usage in HTML:
+         <div class="rule-pair">
+           <hr class="rule-thick">
+           <hr class="rule-thin">
+         </div>
+
+       Reverse the order (thin then thick) at the bottom of a section.
+       ═══════════════════════════════════════════════════════════════════ */
+    .rule-pair {
+      margin: 14px 0;
+    }
+
+    .rule-pair hr {
+      border: none;
+      margin: 0;
+    }
+
+    .rule-thick {
+      border-top: 1.8px solid var(--gold-mid);
+    }
+
+    .rule-thin {
+      border-top: 0.5px solid var(--gold-mid);
+      margin-top: 3px !important; /* small gap between the two rules */
+      opacity: 0.65;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       RUBRIC LINE
+       In BCP tradition, rubrics (instructions and headings) were
+       printed in red. Here rendered in burnt orange (--rubric).
+       Italic, smaller than body text.
+       ═══════════════════════════════════════════════════════════════════ */
+    .rubric {
+      font-size: 13px;
+      font-style: italic;
+      color: var(--rubric);
+      letter-spacing: 0.03em;
+      margin-bottom: 6px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       SUBTITLE
+       Secondary heading below the rubric. Spaced small caps.
+       ═══════════════════════════════════════════════════════════════════ */
+    .subtitle {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      font-weight: 400;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       INTRODUCTORY TEXT BLOCK
+       Set off from the title hierarchy by thin vertical side rules,
+       mimicking the prefatory matter in a prayer book.
+       The text itself is italic and slightly muted.
+       ═══════════════════════════════════════════════════════════════════ */
+    .intro-block {
+      margin: 20px 0;
+      padding: 16px 28px;
+      border-left:  0.5px solid var(--gold-dim);
+      border-right: 0.5px solid var(--gold-dim);
+    }
+
+    .intro-text {
+      font-size: 14px;
+      font-style: italic;
+      text-align: justify;
+      color: var(--cream-body);
+      line-height: 1.85;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       PROVINCE ENTRIES
+       Each province is one .entry block.
+       To add a new province: copy one .entry block and its preceding
+       <hr class="entry-rule"> and update the text and href.
+       ═══════════════════════════════════════════════════════════════════ */
+    .provinces {
+      margin-top: 6px;
+    }
+
+    /* Individual entry container */
+    .entry {
+      padding: 18px 0 16px;
+    }
+
+    /* Roman numeral — small italic, very muted */
+    .entry-numeral {
+      font-size: 11px;
+      font-style: italic;
+      color: var(--gold-ghost);
+      margin-bottom: 6px;
+    }
+
+    /* Spaced abbreviation — the visual anchor of each entry.
+       Spaces between letters (A C N A) follow 1662 BCP convention
+       for distinguishing abbreviations from running text. */
+    .entry-abbr {
+      display: block;
+      font-size: 20px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    /* Full province name — italic, subdued */
+    .entry-full {
+      display: block;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--cream-dim);
+      margin-bottom: 10px;
+      letter-spacing: 0.02em;
+    }
+
+    /* "View the Map" link — styled as a rubric response.
+       Uppercase, spaced, in the rubric orange.
+       The underline uses border-bottom rather than text-decoration
+       so we can control its color and weight precisely. */
+    .entry-link {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--rubric);
+      text-decoration: none;
+      border-bottom: 0.5px solid var(--gold-dim);
+      padding-bottom: 2px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .entry-link:hover {
+      color: var(--gold);
+      border-color: var(--gold-mid);
+    }
+
+    /* Thin rule between entries — much lighter than the section rules */
+    .entry-rule {
+      border: none;
+      border-top: 0.5px solid var(--gold-dim);
+      opacity: 0.3;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       CLOSING RULE PAIR (reversed)
+       At the bottom of the provinces list the rule order is reversed:
+       thin on top, thick on bottom — mirroring the opening pair.
+       This is standard BCP section-close typography.
+       ═══════════════════════════════════════════════════════════════════ */
+    .rule-pair-close {
+      margin: 8px 0 20px;
+    }
+
+    .rule-pair-close hr {
+      border: none;
+      margin: 0;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       COLOPHON
+       The closing line, set in small italic — mirrors the printer's
+       colophon found at the end of historic prayer book editions.
+       Remove the entire <p class="colophon"> element if not wanted.
+       ═══════════════════════════════════════════════════════════════════ */
+    .colophon {
+      font-size: 11px;
+      font-style: italic;
+      color: var(--gold-ghost);
+      letter-spacing: 0.04em;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       RESPONSIVE ADJUSTMENTS
+       On narrow screens (phones), reduce font sizes slightly and
+       tighten letter-spacing so nothing overflows horizontally.
+       The layout itself needs no changes — it is already a single column.
+       ═══════════════════════════════════════════════════════════════════ */
+    @media (max-width: 480px) {
+      .main-title   { font-size: 24px; letter-spacing: 0.07em; }
+      .entry-abbr   { font-size: 16px; letter-spacing: 0.2em; }
+      .intro-block  { padding: 14px 16px; }
+      body          { padding: 36px 18px 44px; }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       FADE-IN ANIMATION
+       The entire leaf gently fades in on page load.
+       Remove the .leaf rule and the @keyframes block to disable.
+       ═══════════════════════════════════════════════════════════════════ */
+    .leaf {
+      animation: fadein 1.1s ease both;
+    }
+
+    @keyframes fadein {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0);   }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!--
+  ═══════════════════════════════════════════════════════════════════════
+  THE LEAF — all visible content lives inside this div.
+  To widen or narrow the layout, change max-width in .leaf above.
+  ═══════════════════════════════════════════════════════════════════════
+  -->
+  <div class="leaf">
+
+    <!-- ── Back link ───────────────────────────────────────────────── -->
+    <!--
+      Returns the visitor to the main portfolio site.
+      Update href if the portfolio URL ever changes.
+    -->
+    <a class="back-link" href="https://josiah-leinbach.github.io">
+      Josiah Leinbach
+    </a>
+
+    <!-- ── Running head ────────────────────────────────────────────── -->
+    <p class="running-head">A Directory of Traditional Prayer Book Parishes</p>
+
+    <!-- ── Main title ──────────────────────────────────────────────── -->
+    <h1 class="main-title">
+      Traditional Anglican<br>Parishes
+    </h1>
+
+    <!-- ── Opening thick-thin rule pair ───────────────────────────── -->
+    <div class="rule-pair">
+      <hr class="rule-thick">
+      <hr class="rule-thin">
+    </div>
+
+    <!-- ── Rubric and subtitle ─────────────────────────────────────── -->
+    <p class="rubric">The Book of Common Prayer (1662) and Other Traditional Prayer Books</p>
+    <p class="subtitle" style="margin-top: 6px;">Provincial Maps</p>
+
+    <!-- ── Introductory text ───────────────────────────────────────── -->
+    <!--
+      To edit the introductory text, change only the words inside
+      <p class="intro-text">. Do not alter the surrounding tags.
+    -->
+    <div class="intro-block">
+      <p class="intro-text">
+        Below are directories of parishes within various Anglican provinces
+        that use some form of a broadly defined traditional prayer book.
+        Select a province below to view the types of traditional prayer books
+        used and a map of parishes that use them. All parish data is
+        crowdsourced on an ongoing basis from site vistors. Links for entry-forms
+        can be found with each provincial map.
+      </p>
+    </div>
+
+    <!-- ── Second thick-thin rule pair ────────────────────────────── -->
+    <div class="rule-pair">
+      <hr class="rule-thick">
+      <hr class="rule-thin">
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         PROVINCE ENTRIES
+         To add a new province:
+           1. Copy one <hr class="entry-rule"> + <div class="entry"> block.
+           2. Paste it after the last existing entry-rule.
+           3. Update the numeral, abbr, full name, and href.
+           4. If the page feels crowded, reduce .entry padding-top/bottom
+              in the CSS above (currently 18px / 16px).
+         ══════════════════════════════════════════════════════════════ -->
+    <div class="provinces">
+
+      <!-- Province I: ACNA -->
+      <div class="entry">
+        <p class="entry-numeral">I.</p>
+        <span class="entry-abbr">A C N A</span>
+        <span class="entry-full">Anglican Church in North America</span>
+        <a class="entry-link"
+           href="https://josiah-leinbach.github.io/traditional_bcp_parishes/ACNA_traditionalBCP.html">
+          View Map
+        </a>
+      </div>
+
+      <hr class="entry-rule">
+
+      <!-- Province II: ACA -->
+      <div class="entry">
+        <p class="entry-numeral">II.</p>
+        <span class="entry-abbr">A C A</span>
+        <span class="entry-full">Anglican Church of Australia</span>
+        <a class="entry-link"
+           href="https://josiah-leinbach.github.io/traditional_bcp_parishes/ACA_traditionalBCP.html">
+          View Map
+        </a>
+      </div>
+
+      <hr class="entry-rule">
+
+      <!-- Province III: C of E -->
+      <div class="entry">
+        <p class="entry-numeral">III.</p>
+        <span class="entry-abbr">C of E</span>
+        <span class="entry-full">Church of England</span>
+        <a class="entry-link"
+           href="https://josiah-leinbach.github.io/traditional_bcp_parishes/CofE_traditionalBCP.html">
+          View Map
+        </a>
+      </div>
+
+    </div>
+    <!-- end .provinces -->
+
+    <!-- ── Closing rule pair (reversed: thin then thick) ──────────── -->
+    <div class="rule-pair-close">
+      <hr class="rule-thin">
+      <hr class="rule-thick" style="margin-top: 3px;">
+    </div>
+
+    <!-- ── Colophon ─────────────────────────────────────────────────
+      Remove this <p> element entirely if you decide not to keep it.
+    ──────────────────────────────────────────────────────────────── -->
+    <p class="colophon">Compiled for the general public use</p>
+
+  </div>
+  <!-- end .leaf -->
+
+</body>
+</html>
