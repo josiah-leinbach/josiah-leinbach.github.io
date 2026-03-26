@@ -237,20 +237,6 @@ nav a.active {
 
 
 /* ================================================================
-  5. PAGE WRAPPER
-
-  A div that wraps the main content of each page. It limits the
-  maximum line length to --max-width and centers everything.
-================================================================ */
-
-.page-wrapper {
-  max-width: var(--max-width);
-  margin: 0 auto;           /* Centers the wrapper on wide screens */
-  padding: 0 1.5rem 5rem;   /* Side padding on small screens; bottom breathing room */
-}
-
-
-/* ================================================================
   6. HERO SECTION
 
   The centered monument layout: name, subtitle, ornamental rule,
@@ -572,11 +558,6 @@ footer {
     --section-gap: 3.5rem;
   }
 
-  /* Reduce page-wrapper side padding on small screens */
-  .page-wrapper {
-    padding: 0 1rem 3rem;
-  }
-
   /* Tighten hero top padding on mobile */
   .hero {
     padding: 3rem 0 3rem;
@@ -606,4 +587,64 @@ footer {
   nav a {
     padding: 0.75rem 0.5rem;
   }
+}
+
+/* 
+  FADE-IN ANIMATION
+  ----------------
+  This defines a reusable animation named "fadeRise".
+  "from" is the starting state; "to" is the ending state.
+  
+  opacity: 0 → 1  makes the page invisible at start, 
+                  then fades to fully visible.
+  
+  translateY(20px) → translateY(0)  moves the page up 
+  20 pixels as it fades in. Adjust "20px" to taste —
+  larger values = more dramatic rise, smaller = subtler.
+  
+  This block does nothing on its own — it only activates
+  when something references it with an "animation:" rule.
+*/
+@keyframes fadeRise {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*
+  APPLY THE ANIMATION
+  -------------------
+  This tells the browser to run "fadeRise" when the 
+  .page-wrapper element is loaded.
+  
+  0.6s         — total duration of the animation
+  ease-out     — starts fast, decelerates smoothly 
+                 (natural, not mechanical)
+  both         — applies the "from" state before the 
+                 animation starts, preventing a flash
+                 of visible content
+*/
+
+.fade-in-page {
+  animation: fadeRise 0.6s ease-out both;
+}
+
+/* ================================================================
+  PAGE WRAPPER
+
+  A div that wraps the main content of each page. It limits the
+  maximum line length to --max-width and centers everything.
+================================================================ */
+
+.page-wrapper {
+  max-width: var(--max-width);
+  margin: 0 auto;           /* Centers the wrapper on wide screens */
+  padding: 0 1.5rem 5rem;   /* Side padding on small screens; bottom breathing room */
+  animation: fadeRise 0.6s ease-out both;
+  padding: 0 1rem 3rem;
 }
